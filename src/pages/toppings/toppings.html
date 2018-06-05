@@ -1,0 +1,64 @@
+<!--
+  Generated template for the ToppingsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-toolbar>
+
+    <div *ngIf="item.prod_name == 'Pancakes'">
+      <ion-title>Choose Topping</ion-title>
+    </div>
+
+    <div *ngIf="item.prod_name == 'Combo of any 4'">
+      <ion-title>Choose your meal</ion-title>
+    </div>
+    
+      <ion-buttons start>
+        <button ion-button (click)="dismiss()">Cancel</button>
+      </ion-buttons>
+</ion-toolbar>  
+
+</ion-header>
+
+
+<ion-content padding style="padding-top: 15px">
+  <div *ngIf="item">
+  <ion-list>
+    <div *ngIf="item.prod_name == 'Pancakes'">
+      <ion-item>
+          <ion-label style="font-size: 14px">Pancake Toppings</ion-label>
+            
+              <ion-select [(ngModel)]="topping">
+                  <ion-option [value]="maple">Maple Syrup</ion-option>
+                  <ion-option [value]="blueberry">Blueberry Syrup</ion-option>
+                  <ion-option [value]="fruit">Mix-Fruit Syrup</ion-option>
+                  <ion-option [value]="butter">Butter</ion-option>
+              </ion-select>
+      </ion-item>
+  </div>
+
+  <div *ngIf="item.prod_name == 'Combo of any 4'">
+    <ion-item>
+        <ion-label style="font-size: 14px">Chooes your meal</ion-label>
+            <ion-select [(ngModel)]="meal" multiple>
+                <ion-option [value]="paneer">Grilled Paneer</ion-option>
+                <ion-option [value]="chicken">Grilled Chicken</ion-option>
+                <ion-option [value]="brice">Brown Rice</ion-option>
+                <ion-option [value]="wrice">White Rice</ion-option>
+                <ion-option [value]="vegies">Vegies</ion-option>
+                <ion-option [value]="spotato">Sweet Potato</ion-option>
+                <ion-option [value]="beans">Kidney Beans/ Mixed Beans</ion-option>                    
+            </ion-select>
+    </ion-item>
+  </div>
+ 
+
+  <div padding>
+    <button ion-button full (click)="getToppings(topping,meal)">Ok</button>
+  </div>
+</ion-list>
+</div>
+</ion-content>

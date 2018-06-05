@@ -1,0 +1,77 @@
+<!--
+  Generated template for the SoupsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title><b>{{ value }}</b></ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding style="background-color: #dde3ec;" class="soups-bg">
+	<div>
+
+  <ion-searchbar color="primary"
+      [(ngModel)]="queryText"
+      (ionInput)="getMeal($event)"
+      placeholder="Search Meal">
+  </ion-searchbar>
+
+    <ion-list>
+      <ion-item-sliding *ngFor="let item of data">
+        <ion-item (click)="description($event,item)">
+<!--    <ion-thumbnail item-start>
+          <img src="">
+        </ion-thumbnail>
+-->        
+        <span class="p-tag">{{ item?.prod_name }}</span>
+          <p style="color:green; padding-left: 20px;" *ngIf=" item.V == 'Y' ">
+            <img alt="logo" height="16" src="assets/img/veg.png">Veg
+          </p>
+          <p style="color:red; padding-left: 20px;" *ngIf=" item.V == 'N' ">
+            <img alt="logo" height="16" src="assets/img/non-veg.png">Non-Veg
+          </p>
+
+          <p style="color:black; padding-left: 20px;">
+            <img alt="logo" height="11" src="assets/img/rupee-indian.png" >{{ item?.mrp }}/-
+          </p>
+       
+
+      <button class="addButton" ion-button clear item-end (click)="add($event,item)">Add</button>
+    </ion-item>
+  </ion-item-sliding>
+    
+    </ion-list>
+ 
+ 
+ 
+ 
+ 
+<!--    <ion-grid paddding>
+      <ion-row text-center>
+        <ion-col>
+  
+        <ion-card *ngFor="let item of items" (click)="order(item)">
+            <img src=""/>
+            <div class="card-title">{{ item?.prod_name }}</div>
+            <div class="card-subtitle">
+                <p *ngIf=" item.V == 'Y' ">Veg</p>
+                <p *ngIf=" item.V == 'N' ">Non-Veg</p>
+            </div>
+            <div>
+              Rs. {{ item?.mrp }}
+            </div>
+            
+        </ion-card>
+        <br>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  -->
+    
+	</div>
+</ion-content>

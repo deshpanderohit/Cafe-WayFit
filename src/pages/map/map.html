@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Cart
+    &nbsp;<ion-icon end name="cart"></ion-icon>
+  </ion-title>
+<!--    <button ion-button end>
+      <ion-icon name="ios-cart-outline" style="position: relative; font-weight: bold; font-size: 2em" color="white">
+        <ion-badge style="position:absolute; font-weight: bold; top:-5px; left:9px; font-size: 9px" color="danger">2</ion-badge>
+      </ion-icon>
+    </button>
+-->
+  </ion-navbar>
+</ion-header>
+
+<ion-content style="background-color: #dde3ec;">
+
+  <div *ngIf="items!==null; else empty">
+  <ion-row padding style="font-size: 15px;">
+    <ion-col col-7><b>Recipes</b></ion-col>
+    <ion-col col-3><b>Quantity</b></ion-col>
+    <ion-col col-2><b>Price</b></ion-col>
+  </ion-row>
+    <ion-list style="padding: 7px;">
+      <ion-item-sliding *ngFor="let item of items">
+        <ion-item>
+          <ion-row>
+          
+            <ion-col col-7>
+                <p id="truncate" style="font-size:13px; color:black;" *ngIf=" item.V == 'Y' ">
+                    <img alt="logo" height="15" src="assets/img/veg.png">{{ item?.prod_name }}
+                </p>
+                <p id="truncate" style="font-size:13px; color:black;" *ngIf=" item.V == 'N' ">
+                    <img alt="logo" height="15" src="assets/img/non-veg.png">{{ item?.prod_name }}
+                </p>
+            </ion-col>
+
+            <ion-col col-3 style="padding-top: 8px;">
+              <ion-icon name="remove-circle" style="font-size:16px;" (click)="decrement($event,item)"></ion-icon>
+                {{ item.quantity }}
+              <ion-icon name="add-circle" style="font-size:16px;" (click)="increment($event,item)"></ion-icon>
+            </ion-col>
+
+            <ion-col col-2 style="padding-top: 8px;">
+              <p ng-model="total" style="font-size:13px; color:black;"> 
+                <img alt="logo" height="11" src="assets/img/rupee-indian.png" >{{ item.mrp * item.quantity }}
+              </p>
+            </ion-col>
+  
+          </ion-row>
+      </ion-item>
+
+<!--      <div padding>
+        <h3>Grand Total : {{  }}</h3>
+      </div>
+    -->      
+    </ion-item-sliding>
+    </ion-list>
+
+    <div padding>
+      <button ion-button full color="facebook" (click)="order(items)">Confirm Order</button> 
+    </div>
+  </div>
+
+  <ng-template #empty>
+    <h2 style="text-align: center">Your Cart is Empty!</h2>
+<!--    <div padding style="text-align: center;">
+    <button ion-button clear (click)="home()">Continue Shopping</button>
+  </div>
+-->  
+  </ng-template>
+
+</ion-content>

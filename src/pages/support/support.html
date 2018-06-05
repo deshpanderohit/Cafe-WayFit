@@ -1,0 +1,59 @@
+<ion-header>
+
+	<ion-navbar>
+		<button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+		<ion-title>Support</ion-title>
+	</ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding style="background-color: #dde3ec;">
+	<h5 style="text-align: center; padding-top: 15px;"><b>Feedback / Enquiry Form</b></h5>
+	<form #submitForm="ngForm" novalidate (ngSubmit)="submit(submitForm)" border="true">
+		
+		
+		<ion-list>
+			<ion-item>
+				<ion-label floating color="primary">Name</ion-label>
+				<ion-input type="text" [(ngModel)]="name" name="cname" #cname="ngModel" required></ion-input>
+			</ion-item>
+
+			<ion-item>
+				<ion-label floating color="primary">Email</ion-label>
+				<ion-input type="email" [(ngModel)]="email" name="cemail" #cemail="ngModel" required></ion-input>
+			</ion-item>
+
+			<ion-item>
+				<ion-label floating color="primary">Subject</ion-label>
+				<ion-input type="text" [(ngModel)]="subject" name="csubject" #csubject="ngModel" required></ion-input>
+			</ion-item>
+
+			<ion-item>
+				<ion-label floating color="primary">Message</ion-label>
+				<ion-textarea [(ngModel)]="supportMessage" name="supportQuestion" #supportQuestion="ngModel" rows="3" required></ion-textarea>
+			</ion-item>
+
+		</ion-list>
+
+		<p ion-text [hidden]="cname.valid || submitted === false" color="danger" padding-left>
+			Please enter your name 
+		</p>
+		<p ion-text [hidden]="cemail.valid || submitted === false" color="danger" padding-left>
+			Please enter valid email
+		</p>
+		<p ion-text [hidden]="csubject.valid || submitted === false" color="danger" padding-left>
+			Please enter subject
+		</p>
+
+		<p ion-text [hidden]="supportQuestion.valid || submitted === false" color="danger" padding-left>
+			Support message is required
+		</p>
+	
+		<div padding>
+			<button ion-button block type="submit">Submit</button>
+		</div>
+	</form>
+</ion-content>

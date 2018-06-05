@@ -1,0 +1,76 @@
+<ion-header>
+	<ion-navbar>
+		<button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+		<ion-title>Login</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content text-center padding class="background-image">
+<!--	<div class="logo">
+		<img src="assets/img/appicon.svg" alt="Ionic logo">
+	</div>
+-->
+
+<form novalidate #loginForm="ngForm" [formGroup]="user" class="background-color">
+
+<ion-item>
+<ion-label floating>Username</ion-label>
+<ion-input type="text" [(ngModel)]="username" value="" formControlName="name"></ion-input>
+</ion-item>
+
+<ion-item no-lines *ngIf="( user.get('name').hasError('minlength') || user.get('name').hasError('required') ) && user.get('name').touched">
+
+<div class="error" *ngIf="user.get('name').hasError('required') && user.get('name').touched">
+Please enter your username
+</div>
+<div class="error" *ngIf="user.get('name').hasError('minlength') && user.get('name').touched">
+Minimum of 4 characters
+</div>
+</ion-item>
+
+
+
+<ion-item>
+<ion-label floating>Password</ion-label>
+<ion-input type="password" [(ngModel)]="password" value="" formControlName="password"></ion-input>
+</ion-item>
+
+<ion-item no-lines *ngIf="( user.get('password').hasError('required') || user.get('password').hasError('minlength') || user.get('password').hasError('maxlength'))&& user.get('password').touched">
+
+<div class="error" *ngIf="user.get('password').hasError('required') && user.get('password').touched">
+Please enter your password
+</div>
+<div class="error" *ngIf="user.get('password').hasError('minlength') && user.get('password').touched">
+Password must contain at least 4 characters
+</div>
+
+<div class="error" *ngIf="user.get('password').hasError('maxlength') && user.get('password').touched">
+Maximum password length is 20
+</div>
+</ion-item>
+
+
+<div padding>
+<button ion-button full [disabled]="user.invalid" (click)="validateLogin()">Login</button>
+</div>
+</form>
+
+<div padding style="padding-top: 40px;">
+	<p class="gray" align="center"><b>New to WayFit?</b></p>
+	<button ion-button full (click)="userSignup()">Register Now!</button>
+</div>
+
+
+
+</ion-content>
+
+
+<style type="text/css">
+.error
+{
+color:red;
+font-size:12px;
+}
+</style>

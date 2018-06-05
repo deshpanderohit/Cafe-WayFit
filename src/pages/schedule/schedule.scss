@@ -1,0 +1,52 @@
+$categories: (
+ soups: color($colors, primary),
+ snacks: #AC282B,
+ salads: #8E8D93,
+ sandwiches: #FE4C52,
+ maincourse: #FD8B2D,
+ choicemeals: #FED035,
+ smoothies: #69BB7B,
+ beverages: #3BC7C4,
+
+);
+
+@function auxiliary-categories() {
+  @return map-remove($categories);
+}
+
+page-schedule {
+  @each $track, $value in auxiliary-categories() {
+   ion-item-sliding[track=#{$track}] ion-label {
+     border-left: 2px solid $value;
+     padding-left: 10px;
+   }
+  }
+}
+
+
+.fab[mini] {
+    margin: 10px;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+}
+
+.col-12 {
+  column-count: 2;
+  //grid-auto-columns: auto; 
+  column-gap: 10px;
+  
+}
+
+.full-image {
+  width: 100%;
+  height: 100%;
+}
+
+.card-title {
+  text-align: center;
+}
+
+
+
+

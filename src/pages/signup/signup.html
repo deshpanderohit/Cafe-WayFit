@@ -1,0 +1,221 @@
+<ion-header>
+	<ion-navbar>
+		<button ion-button menuToggle>
+		      <ion-icon name="menu"></ion-icon>
+		</button>
+		
+		<ion-title>User Registration</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content padding style="background-color: #dde3ec;">
+
+
+<div>
+	<ion-segment [(ngModel)]="signup">
+	    <ion-segment-button value="gmembers">
+			Gym Members
+	    </ion-segment-button>
+
+	    <ion-segment-button value="newusers">
+		    New Users
+	    </ion-segment-button>
+	  </ion-segment>
+</div>
+
+<div padding [ngSwitch]="signup">
+	<ion-list *ngSwitchCase="'gmembers'">
+
+	<form novalidate [formGroup]="user">
+
+		<ion-item>
+			<ion-label floating>Membership ID</ion-label>
+			<ion-input type="text" value="" formControlName="memid"></ion-input>
+		</ion-item>
+
+		<ion-item no-lines *ngIf="( user.get('memid').hasError('minlength') || user.get('memid').hasError('required') ) && user.get('memid').touched">
+			<div class="error" *ngIf="user.get('memid').hasError('required') && user.get('memid').touched">
+			Please enter your membership id
+			</div>
+			<!--<div class="error" *ngIf="user.get('memid').hasError('minlength') && user.get('memid').touched">
+			Minimum of 4 characters
+			</div>-->
+		</ion-item>
+
+
+
+		<ion-item>
+			<ion-label floating>Username</ion-label>
+			<ion-input type="text" value="" formControlName="name"></ion-input>
+		</ion-item>
+
+		<ion-item no-lines *ngIf="( user.get('name').hasError('minlength') || user.get('name').hasError('required') ) && user.get('name').touched">
+			<div class="error" *ngIf="user.get('name').hasError('required') && user.get('name').touched">
+			Please enter your username
+			</div>
+			<div class="error" *ngIf="user.get('name').hasError('minlength') && user.get('name').touched">
+			Minimum of 4 characters
+			</div>
+		</ion-item>
+
+
+		<ion-item>
+			<ion-label floating>Password</ion-label>
+			<ion-input type="password" value="" formControlName="password"></ion-input>
+		</ion-item>
+
+		<ion-item no-lines *ngIf="( user.get('password').hasError('required') ) && user.get('password').touched">
+			<div class="error" *ngIf="user.get('password').hasError('required') && user.get('password').touched">
+			Password is required
+			</div>
+		</ion-item>
+
+
+		<ion-item>
+			<ion-label floating>Confirm Password</ion-label>
+			<ion-input type="password" value="" formControlName="re_password"></ion-input>
+		</ion-item>
+
+		<ion-item no-lines *ngIf="( user.get('re_password').hasError('equalTo') || user.get('re_password').hasError('required') ) && user.get('re_password').touched">
+			<div class="error" *ngIf="user.get('re_password').hasError('required') && user.get('re_password').touched">
+			Confirm password is required
+			</div>
+			<div class="error" *ngIf="user.get('re_password').hasError('equalTo') && user.get('re_password').touched">
+			Password Mismatch
+			</div>
+		</ion-item>
+
+
+<div padding>
+		<button ion-button full [disabled]="user.invalid" (click)="mregister()">Register</button>
+</div>
+
+	</form>
+</ion-list>
+
+  <ion-list *ngSwitchCase="'newusers'">
+
+	<form novalidate [formGroup]="member">
+
+		<ion-item>
+			<ion-label floating>Full Name</ion-label>
+			<ion-input type="text" value="" formControlName="name"></ion-input>
+		</ion-item>
+
+		<ion-item no-lines *ngIf="( member.get('name').hasError('minlength') || member.get('name').hasError('required') ) && member.get('name').touched">
+			<div class="error" *ngIf="member.get('name').hasError('required') && member.get('name').touched">
+			Please enter your full name
+			</div>
+			<!--<div class="error" *ngIf="user.get('memid').hasError('minlength') && user.get('memid').touched">
+			Minimum of 4 characters
+			</div>-->
+		</ion-item>
+
+
+		<ion-item>
+			<ion-label floating>Username</ion-label>
+			<ion-input type="text" value="" formControlName="username"></ion-input>
+		</ion-item>
+
+		<ion-item no-lines *ngIf="( member.get('username').hasError('minlength') || member.get('username').hasError('required') ) && member.get('username').touched">
+			<div class="error" *ngIf="member.get('username').hasError('required') && member.get('username').touched">
+			Please enter your username
+			</div>
+			<div class="error" *ngIf="member.get('username').hasError('minlength') && member.get('username').touched">
+			Minimum of 4 characters
+			</div>
+		</ion-item>
+
+
+		<ion-item>
+		<ion-label floating>Email</ion-label>
+		<ion-input type="text" value="" formControlName="email"></ion-input>
+
+
+		</ion-item>
+
+		<ion-item no-lines *ngIf="( member.get('email').hasError('required') || member.get('email').hasError('email') ) && member.get('email').touched">
+
+
+
+		<div class="error" *ngIf="member.get('email').hasError('required') && member.get('email').touched">
+		Please enter your email
+		</div>
+
+<!--		<div class="error" *ngIf="member.get('email').hasError('email') && member.get('email').touched">
+		Please enter valid email
+		</div>
+-->
+		</ion-item>
+
+
+		<ion-item>
+		<ion-label floating>Mob</ion-label>
+		<ion-input type="text" value="" formControlName="mob"></ion-input>
+
+
+		</ion-item>
+
+		<ion-item no-lines *ngIf="( member.get('mob').hasError('required') || member.get('mob').hasError('minlength') || member.get('mob').hasError('maxlength'))&& member.get('mob').touched">
+
+
+
+		<div class="error" *ngIf="member.get('mob').hasError('required') && member.get('mob').touched">
+		Please enter your mobile number
+		</div>
+		<div class="error" *ngIf="member.get('mob').hasError('minlength') && member.get('mob').touched">
+		Please enter valid mobile number
+		</div>
+
+		<div class="error" *ngIf="member.get('mob').hasError('maxlength') && member.get('mob').touched">
+		Please enter valid mobile number
+		</div>
+
+</ion-item>
+
+		<ion-item>
+			<ion-label floating>Password</ion-label>
+			<ion-input type="password" value="" formControlName="password"></ion-input>
+		</ion-item>
+
+		<ion-item no-lines *ngIf="( member.get('password').hasError('required') ) && member.get('password').touched">
+			<div class="error" *ngIf="member.get('password').hasError('required') && member.get('password').touched">
+			Password is required
+			</div>
+		</ion-item>
+
+
+		<ion-item>
+			<ion-label floating>Confirm Password</ion-label>
+			<ion-input type="password" value="" formControlName="re_password"></ion-input>
+		</ion-item>
+
+		<ion-item no-lines *ngIf="( member.get('re_password').hasError('equalTo') || member.get('re_password').hasError('required') ) && member.get('re_password').touched">
+			<div class="error" *ngIf="member.get('re_password').hasError('required') && member.get('re_password').touched">
+			Confirm password is required
+			</div>
+			<div class="error" *ngIf="member.get('re_password').hasError('equalTo') && member.get('re_password').touched">
+			Password Mismatch
+			</div>
+		</ion-item>
+
+
+<div padding>
+		<button ion-button full [disabled]="member.invalid" (click)="newmregister()">Register</button>
+</div>
+
+	</form>
+</ion-list>
+</div>
+</ion-content>
+
+
+<style type="text/css">
+.error
+{
+	color:red;
+	font-size:12px;
+}
+
+</style>
+

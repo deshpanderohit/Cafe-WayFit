@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-navbar no-border-bottom>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+    <ion-title style="text-align: center; padding-right: 10px;">
+      <img alt="logo" height="58" src="assets/img/Wayfit logo1.png" >
+    </ion-title>
+
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="presentFilter()">
+        <ion-icon ios="ios-options-outline" md="md-options"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+  <ion-toolbar no-border-top>
+    <ion-searchbar color="primary"
+                   [(ngModel)]="queryText"
+                   (ionInput)="getItems($event)"
+                   placeholder="Search Diet">
+    </ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-grid paddding style="margin-top:10px;">
+    <ion-row>
+      <ion-col class="col-12">
+
+      <ion-card *ngFor="let item of data" (click)="view(item)" style="padding-bottom: 6px;" >
+          <img class="full-image" src="assets/img/Food/{{item.cat_name}}.png"/>
+          <div class="card-title" style="font-size: 15px">{{ item?.cat_name }}</div>
+      </ion-card>
+
+      </ion-col>
+  	</ion-row>
+  </ion-grid>
+
+
+<!--  <ion-fab bottom right #fab>
+    <button ion-fab mini><ion-icon name="share"></ion-icon></button>
+    <ion-fab-list side="top">
+      <button ion-fab color="vimeo" (click)="openSocial('Vimeo', fab)"><ion-icon name="logo-vimeo"></ion-icon></button>
+      <button ion-fab color="google" (click)="openSocial('Google+', fab)"><ion-icon name="logo-googleplus"></ion-icon></button>
+      <button ion-fab color="twitter" (click)="openSocial('Twitter', fab)"><ion-icon name="logo-twitter"></ion-icon></button>
+      <button ion-fab color="facebook" (click)="openSocial('Facebook', fab)"><ion-icon name="logo-facebook"></ion-icon></button>
+    </ion-fab-list>
+  </ion-fab>
+
+
+  <button ion-button clear (click)="scroll()" float-right style="padding-right: 30px" >Go to top</button>
+-->
+</ion-content>

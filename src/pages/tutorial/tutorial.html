@@ -1,0 +1,56 @@
+<ion-header no-border>
+  <ion-navbar>
+    <ion-buttons end *ngIf="showSkip">
+      <button ion-button (click)="startApp()" color="primary">Skip</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content no-bounce>
+  <ion-slides #slides (ionSlideWillChange)="onSlideChangeStart($event)" pager>
+
+    <ion-slide class="slider-home">
+      <img src="assets/img/WayFit logo.png" class="slide-image"/>
+      <h2 class="slide-title">
+        Welcome to <b>WayFit</b>
+      </h2>
+      <p>
+        WayFit is part of multi facility Fitness Galaxy Health Club with WayFit Gym, WayFit Studio and WayFit Café.
+      </p>
+    </ion-slide>
+
+    <ion-slide class="slider-gym">
+      <img src="assets/img/WayFit logo.png" class="slide-image"/>
+      <h2 class="slide-title" ><b>Gym</b></h2>
+      <p>
+        WayFit gym helps you control first piller of optimal health which is daily exercise. WayFit Gym contains combination of strength training machines, Cardio machines and also other exercise equipments and facilities.
+      </p>
+    </ion-slide>
+
+    <ion-slide class="slider-studio">
+      <img src="assets/img/WayFit logo.png" class="slide-image"/>
+      <h2 class="slide-title"><b>Studio</b></h2>
+      <p>
+        WayFit studio is our GroupX facility where in we have group activities like Yoga, Zumba, Pilates and other group activity forms taking care of mental health along with your physical health. Thus Wayfit Studio takes care of your 2nd piller of optimal health which is positive mental attitude .
+      </p>
+    </ion-slide>
+
+    <ion-slide class="slider-cafe">
+      <img src="assets/img/WayFit logo.png" class="slide-image"/>
+      <h2 class="slide-title"><b>Café</b></h2>
+      <p>
+        Our diet café where you can order food based on your diet plan. Various options available to pick and chose your diet items. With delivery option available within Pune you need not have to carry your salads or other diet items to office. Just place an order online and we will deliver it to place you want within Pune City.
+      </p>
+    </ion-slide>
+
+    <ion-slide class="slider-final">
+      <img src="assets/img/WayFit logo.png" class="slide-image"/>
+      <h2 class="slide-title">Book your Diet today!</h2>
+      <button ion-button icon-end large clear style="font-size: 16px;" (click)="startApp()">
+        Continue
+        <ion-icon name="arrow-forward"></ion-icon>
+      </button>
+    </ion-slide>
+
+  </ion-slides>
+</ion-content>

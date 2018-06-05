@@ -1,0 +1,17 @@
+<ion-content has-footer="true" has-tabs="true">
+
+<ion-tabs [selectedIndex]="mySelectedIndex" name="conference" mode="md" tabsPlacement="bottom">
+  <ion-tab class="top-44" [root]="tab1Root" tabIcon="nutrition" (ionSelect)="scroll()" tabUrlPath="conference-schedule"></ion-tab>
+  <ion-tab class="top-44" [root]="tab2Root" tabIcon="clipboard"></ion-tab>
+  <ion-tab class="top-44" [root]="tab3Root" tabIcon="cart"></ion-tab>
+  <ion-tab class="top-44" [root]="tab4Root" tabIcon="flash"></ion-tab>
+</ion-tabs>
+</ion-content>
+
+
+<!--
+  tabTitle="Meals"
+  tabTitle="Plans"
+  tabTitle="Cart"
+  tabTitle="Offers"
+-->

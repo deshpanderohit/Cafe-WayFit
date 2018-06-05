@@ -1,0 +1,65 @@
+page-soups {
+
+  
+    .card-background-page {
+
+        ion-card {
+          position: relative;
+          text-align: center;
+        }
+      
+        .card-title {
+          position: absolute;
+          top: 36%;
+          font-size: 3.0em;
+          width: 100%;
+          font-weight: bold;
+          color: #fff;
+        }
+
+        .card-subtitle {
+          font-size: 1.0em;
+          position: absolute;
+          top: 52%;
+          width: 100%;
+          color: #fff;
+        }
+    }
+/*
+    .item ion-thumbnail {
+      min-width: 5rem;    
+      min-height: 5rem;
+      img {
+          max-width: 5rem;    
+          min-width: 5rem;
+      }
+  }
+*/
+
+  .h2 {
+    font-size: 5px;
+  }
+
+  .p-tag {
+    padding-left: 20px;
+    font-size: 16px;
+    color: black;
+  }
+
+  .addButton {
+    border: solid;
+    border-color: black;
+    border-width: 2px;
+    color: black;
+  }
+}
+
+.scroll-content {
+  overflow-y: auto !important;
+/*    background-image: url(../../assets/img/Diet.jpg); 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+*/
+}   
+
