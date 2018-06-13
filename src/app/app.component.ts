@@ -14,11 +14,12 @@ import { TutorialPage } from '../pages/tutorial/tutorial';
 import { SchedulePage } from '../pages/schedule/schedule';
 import { SpeakerListPage } from '../pages/speaker-list/speaker-list';
 import { SupportPage } from '../pages/support/support';
-import { OffersPage } from '../pages/offers/offers';
+//import { OffersPage } from '../pages/offers/offers';
 
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
 import { AboutPage } from '../pages/about/about';
+import { ContactPage } from '../pages/contact/contact';
 
 export interface PageInterface {
   title: string;
@@ -46,7 +47,7 @@ export class ConferenceApp {
     { title: 'Meals', name: 'TabsPage', component: TabsPage, tabComponent: SchedulePage, index: 0, icon: 'nutrition' },
     { title: 'Plans', name: 'TabsPage', component: TabsPage, tabComponent: SpeakerListPage, index: 1, icon: 'clipboard' },
     { title: 'Cart', name: 'TabsPage', component: TabsPage, tabComponent: MapPage, index: 2, icon: 'cart' },
-    { title: 'Offers', name: 'TabsPage', component: TabsPage, tabComponent: OffersPage, index: 3, icon: 'flash' }
+    { title: 'About Us', name: 'TabsPage', component: TabsPage, tabComponent: AboutPage, index: 3, icon: 'information-circle' }
   ];
   loggedInPages: PageInterface[] = [
     { title: 'Account', name: 'AccountPage', component: AccountPage, icon: 'person' },
@@ -122,7 +123,7 @@ export class ConferenceApp {
   }
 
   about() {
-    this.nav.setRoot(AboutPage);
+    this.nav.push(ContactPage);
   }
 
   listenToLoginEvents() {

@@ -1,0 +1,83 @@
+<!--
+  Generated template for the OrderPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Order Summary</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding style="background-color: #dde3ec;">
+
+  <p style="font-size: 17px; text-align: center;">
+      Your order is comfirmed!
+  </p>
+
+  <ion-list no-line style="padding-top: 20px;">
+    <ion-item *ngFor="let data of meal">
+      <ion-row>
+        <ion-col col-7>
+            <p id="truncate" style="font-size:13px; color:black;" *ngIf=" data.V == 'Y' ">
+                <img alt="logo" height="15" src="assets/img/veg.png">{{ data?.prod_name }}
+            </p>
+            <p id="truncate" style="font-size:13px; color:black;" *ngIf=" data.V == 'N' ">
+                <img alt="logo" height="15" src="assets/img/non-veg.png">{{ data?.prod_name }}
+            </p>
+    </ion-col>
+
+        <ion-col col-3>
+          <p id="truncate" style="font-size: 13px; color:black;">
+            X {{ data?.quantity }}
+          </p>
+        </ion-col>
+
+        <ion-col col-2>
+          <p id="truncate" style="font-size: 13px; color:black;">
+              <img alt="logo" height="11" src="assets/img/rupee-indian.png" >{{ data?.total }}            
+          </p>
+        </ion-col>
+      </ion-row>      
+    </ion-item>
+
+    <ion-item style="padding-top: 10px;">
+      <ion-row>
+        <ion-col col-7>
+          <p style="font-size: 15px; color:black;">
+            <b>Payable Amount</b>
+          </p>
+        </ion-col>
+        <ion-col col-3></ion-col>
+        <ion-col col-2>
+          <p id="truncate" style="font-size: 17px; color:black;">
+            <img alt="logo" height="11" src="assets/img/rupee-indian.png" >{{ total }}            
+          </p>
+        </ion-col>
+      
+      </ion-row>
+    </ion-item>
+  </ion-list>
+  <p style="text-align: center; padding-top: 20px;"><b>Thank you!</b></p>
+  <button ion-button full (click)="home()" color="facebook">Continue Shopping</button>
+</ion-content>
+
+<!--
+<ion-row>
+    <ion-col col-7>
+      <p style="font-size: 15px; color:black;">
+        Grand Total
+      </p>
+    </ion-col>
+
+    <ion-col col-2>
+      <p id="truncate" style="font-size: 13px; color:black;">
+        <img alt="logo" height="11" src="assets/img/rupee-indian.png" >{{ total }}            
+      </p>
+    </ion-col>
+  
+  </ion-row>
+-->

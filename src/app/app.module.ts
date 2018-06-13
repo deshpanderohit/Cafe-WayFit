@@ -34,6 +34,8 @@ import { ItemsPage } from '../pages/items/items';
 import { TimePage } from '../pages/time/time';
 import { ToppingsPage } from '../pages/toppings/toppings';
 import { AddressPage } from '../pages/address/address';
+import { OrderPage } from '../pages/order/order';
+import { ContactPage } from '../pages/contact/contact';
 
 
 import { ConferenceData } from '../providers/conference-data';
@@ -45,6 +47,8 @@ import { MealsdataProvider } from '../providers/mealsdata/mealsdata';
   declarations: [
     ConferenceApp,
     CusthomePage,
+    OrderPage,
+    ContactPage,
     ItemsPage,
     OffersPage,
     AddressPage,
@@ -97,6 +101,8 @@ import { MealsdataProvider } from '../providers/mealsdata/mealsdata';
     ConferenceApp,
     CusthomePage,
     OffersPage,
+    OrderPage,
+    ContactPage,
     TimePage,
     AddressPage,
     ItemsPage,

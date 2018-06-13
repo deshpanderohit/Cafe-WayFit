@@ -30,11 +30,13 @@
     </ion-item>
 
   <div padding style="padding-top: 50px">
-    <h5>Grand Total: Rs.{{ total }}/-</h5>
+    <h5>Total Amount:
+        <img alt="logo" height="13" src="assets/img/rupee-indian.png" >{{ total }}/-
+    </h5>
   </div>
 
   <div padding>
-    <button ion-button full (click)="order(total,time)">Place Order</button>
+    <button ion-button full color="facebook" (click)="order(total,time)">Place Order</button>
   </div>
 </ion-list>
 </div>

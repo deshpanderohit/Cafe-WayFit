@@ -38,6 +38,9 @@
     },
     "cordova-plugin-ionic-keyboard": {
       "PACKAGE_NAME": "io.ionic.conferenceapp"
+    },
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "io.ionic.conferenceapp"
     }
   },
   "dependent_plugins": {}

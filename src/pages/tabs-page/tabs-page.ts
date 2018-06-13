@@ -5,9 +5,10 @@ import { NavParams, Content, Events } from 'ionic-angular';
 import { MapPage } from '../map/map';
 import { SchedulePage } from '../schedule/schedule';
 import { SpeakerListPage } from '../speaker-list/speaker-list';
-import { OffersPage } from '../offers/offers';
+//import { OffersPage } from '../offers/offers';
 
 import { UserData } from '../../providers/user-data';
+import { AboutPage } from '../about/about';
 
 @Component({
   templateUrl: 'tabs-page.html'
@@ -19,7 +20,7 @@ export class TabsPage {
   tab1Root: any = SchedulePage;
   tab2Root: any = SpeakerListPage;
   tab3Root: any = MapPage;
-  tab4Root: any = OffersPage;
+  tab4Root: any = AboutPage;
   mySelectedIndex: number;
   badge: any;
 

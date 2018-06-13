@@ -11,6 +11,7 @@ import { MealsdataProvider } from '../../providers/mealsdata/mealsdata';
   selector: 'page-schedule-filter',
   templateUrl: 'schedule-filter.html'
 })
+
 export class ScheduleFilterPage {
 
   tracks: Array<{name: string, isChecked: boolean}> = [];

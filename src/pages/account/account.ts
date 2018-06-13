@@ -81,4 +81,8 @@ export class AccountPage {
     let addrModal = this.modalCtrl.create(AddressPage,{},{showBackdrop: true, enableBackdropDismiss: true});
     addrModal.present();
   }
+
+  order() {
+    
+  }
 }

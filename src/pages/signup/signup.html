@@ -37,12 +37,7 @@
 			<div class="error" *ngIf="user.get('memid').hasError('required') && user.get('memid').touched">
 			Please enter your membership id
 			</div>
-			<!--<div class="error" *ngIf="user.get('memid').hasError('minlength') && user.get('memid').touched">
-			Minimum of 4 characters
-			</div>-->
 		</ion-item>
-
-
 
 		<ion-item>
 			<ion-label floating>Username</ion-label>
@@ -106,9 +101,6 @@
 			<div class="error" *ngIf="member.get('name').hasError('required') && member.get('name').touched">
 			Please enter your full name
 			</div>
-			<!--<div class="error" *ngIf="user.get('memid').hasError('minlength') && user.get('memid').touched">
-			Minimum of 4 characters
-			</div>-->
 		</ion-item>
 
 
@@ -119,59 +111,46 @@
 
 		<ion-item no-lines *ngIf="( member.get('username').hasError('minlength') || member.get('username').hasError('required') ) && member.get('username').touched">
 			<div class="error" *ngIf="member.get('username').hasError('required') && member.get('username').touched">
-			Please enter your username
+				Please enter your username
 			</div>
 			<div class="error" *ngIf="member.get('username').hasError('minlength') && member.get('username').touched">
-			Minimum of 4 characters
+				Minimum of 4 characters
 			</div>
 		</ion-item>
-
 
 		<ion-item>
 		<ion-label floating>Email</ion-label>
 		<ion-input type="text" value="" formControlName="email"></ion-input>
-
-
 		</ion-item>
 
 		<ion-item no-lines *ngIf="( member.get('email').hasError('required') || member.get('email').hasError('email') ) && member.get('email').touched">
-
-
-
-		<div class="error" *ngIf="member.get('email').hasError('required') && member.get('email').touched">
-		Please enter your email
-		</div>
-
-<!--		<div class="error" *ngIf="member.get('email').hasError('email') && member.get('email').touched">
-		Please enter valid email
-		</div>
--->
+			<div class="error" *ngIf="member.get('email').hasError('required') && member.get('email').touched">
+				Please enter your email
+			</div>
 		</ion-item>
 
-
 		<ion-item>
-		<ion-label floating>Mob</ion-label>
-		<ion-input type="text" value="" formControlName="mob"></ion-input>
-
-
+			<ion-label floating>Mob</ion-label>
+			<ion-input type="text" value="" formControlName="mob"></ion-input>
 		</ion-item>
 
 		<ion-item no-lines *ngIf="( member.get('mob').hasError('required') || member.get('mob').hasError('minlength') || member.get('mob').hasError('maxlength'))&& member.get('mob').touched">
+			<div class="error" *ngIf="member.get('mob').hasError('required') && member.get('mob').touched">
+				Please enter your mobile number
+			</div>
+			<div class="error" *ngIf="member.get('mob').hasError('minlength') && member.get('mob').touched">
+				Please enter valid mobile number
+			</div>
 
+			<div class="error" *ngIf="member.get('mob').hasError('maxlength') && member.get('mob').touched">
+				Please enter valid mobile number
+			</div>
+		</ion-item>
 
-
-		<div class="error" *ngIf="member.get('mob').hasError('required') && member.get('mob').touched">
-		Please enter your mobile number
-		</div>
-		<div class="error" *ngIf="member.get('mob').hasError('minlength') && member.get('mob').touched">
-		Please enter valid mobile number
-		</div>
-
-		<div class="error" *ngIf="member.get('mob').hasError('maxlength') && member.get('mob').touched">
-		Please enter valid mobile number
-		</div>
-
-</ion-item>
+		<ion-item>
+			<ion-label floating>Address</ion-label>
+			<ion-textarea name="address" rows="3" required></ion-textarea>
+		</ion-item>
 
 		<ion-item>
 			<ion-label floating>Password</ion-label>
@@ -183,7 +162,6 @@
 			Password is required
 			</div>
 		</ion-item>
-
 
 		<ion-item>
 			<ion-label floating>Confirm Password</ion-label>
@@ -201,7 +179,7 @@
 
 
 <div padding>
-		<button ion-button full [disabled]="member.invalid" (click)="newmregister()">Register</button>
+		<button ion-button color="facebook" full [disabled]="member.invalid" (click)="newmregister()">Register</button>
 </div>
 
 	</form>

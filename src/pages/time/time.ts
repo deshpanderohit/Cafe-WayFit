@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, ToastController } from 'ionic-angular';
 
 import { UserData } from '../../providers/user-data';
+import { OrderPage } from '../order/order';
+import { Storage } from '@ionic/storage';
 
 /**
  * Generated class for the TimePage page.
@@ -20,11 +22,14 @@ export class TimePage {
   timeslots: any;
   time: any;
   items: any;
+  toast: any;
   data: any;
   toppings: any;
   meal: any = [];
   quantities: any = [];
   total: any;
+  final_top: any;
+  final_combo: any;
 
   initialize() {
 
@@ -50,7 +55,7 @@ export class TimePage {
 
 }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public userData: UserData) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public userData: UserData, public storage: Storage, public toastCtrl: ToastController) {
     this.initialize();
     this.getMealsData();
     JSON.stringify(this.timeslots);
@@ -95,14 +100,52 @@ export class TimePage {
     this.userData.getMeals().then(data => {
       this.meal = data;
 
-      console.log("Meal: "+JSON.stringify(this.meal));
+      //console.log("Meal: "+JSON.stringify(this.meal));
 
         this.meal.forEach(function(value) {
-          delete value.V;
-          delete value.N;
+          delete value.prod_desc;
+          delete value.prod_img;
+          delete value.mrp;
+
+          if( value.prod_name == "Pancake") {
+            this.userData.getToppings().then(data => {
+              this.final_top = data;
+
+              this.storage.remove('toppings');
+            })
+          }
+          else if( value.prod_name == "Combo of any 4" ) {
+            this.userData.getMealsData().then(data => {
+              this.final_combo = data;
+
+              this.storage.remove('combo');
+            })
+          }
+         
         });
-        
-      console.log("Updated Meal: "+JSON.stringify(this.meal));  
+        this.storage.remove('meal');
+        this.toast = this.toastCtrl.create({
+          message: 'Your order has been placed!',
+          showCloseButton: true,
+          closeButtonText: 'View'
+        });
+
+        this.toast.onDidDismiss((data,role) => {
+          console.log("Success: "+data);
+          if (role == 'close') {
+            this.navCtrl.push(OrderPage,{meal: this.meal,toppings: this.final_top,combo: this.final_combo,timeslot: timeslot,total: this.total});
+          }
+        });
+        this.toast.present();
+
+    
+      //console.log("Updated Meal: "+JSON.stringify(this.meal));
+      
+      
     })
+
+    
+    //this.storage.remove('meal');
+    
   }
 }

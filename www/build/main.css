@@ -43721,6 +43721,11 @@ page-address .manager-sheet-content {
   padding: 20px;
 }
 
+page-contact #map {
+  width: 100%;
+  height: 60%;
+}
+
 page-description .modal {
   background-color: white;
 }
@@ -43848,6 +43853,15 @@ ion-app._gmaps_cdv_ .nav-decor {
 
 .has-footer.has-tabs, .bar-footer.has-tabs {
   bottom: 93px;
+}
+
+page-order #truncate {
+  width: 140px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  -ms-text-overflow: ellipsis;
 }
 
 page-schedule ion-item-sliding[track=soups] ion-label {
@@ -44163,8 +44177,8 @@ page-tutorial .slide-title {
 }
 
 page-tutorial .slide-image {
-  max-height: 50%;
-  max-width: 60%;
+  max-height: 80%;
+  max-width: 80%;
   margin: 36px 0;
 }
 

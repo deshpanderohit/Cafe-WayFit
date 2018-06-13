@@ -7,6 +7,171 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content no-bounce>
+    <div>
+        <ion-segment [(ngModel)]="gym">
+          <ion-segment-button value="programs">
+            Programs
+          </ion-segment-button>
+      
+          <ion-segment-button value="facilities">
+            Facilities
+          </ion-segment-button>
 
+          <ion-segment-button value="features">
+            Features
+          </ion-segment-button>
+        </ion-segment>
+      </div>
+      
+      <div padding [ngSwitch]="gym">
+        <div id="wrapper" *ngSwitchCase="'programs'">
+          <ion-slides #slider pagr>
+
+            <ion-slide>
+              <img src="assets/img/Gym/yoga.jpg"/>
+                <button float-right ion-button clear (click)="next()">
+                  <ion-icon name="arrow-forward" style="color: black;"></ion-icon>
+                </button>
+                <div style="text-align: center; padding-top: 30px; padding-left: 40px;"><b>Yoga</b></div>
+                <p style="font-size: 13px;" padding>
+                  Derived from the Sanskrit word yuj, Yoga means union of the individual consciousness or soul with the Universal Consciousness or Spirit. Yoga is a 5000-year-old. Though many a times, yoga is mistaken for just a physical practice but it is not just like any other type of exercise.. Yoga is mental, physical and spiritual. It provides powerful benefits for your health and fitness at same time it also offers harmony, balance and peace for the mind and the soul.
+                </p>
+                
+            </ion-slide>
+            <br>
+
+            <ion-slide>
+              <img src="assets/img/Gym/power yoga.jpg"/>
+                
+                <button float-left ion-button clear (click)="prev()">
+                  <ion-icon name="arrow-back" style="color: black;"></ion-icon>
+                </button>
+                <button float-right ion-button clear (click)="next()">
+                  <ion-icon name="arrow-forward" style="color: black;"></ion-icon>
+                </button>
+                <div style="text-align: center; padding-top: 30px;"><b>Power Yoga</b></div>
+                <p style="font-size: 13px;" padding>
+                  Power Yoga is a customizable yoga style influenced by aerobic exercise. Due to its up tempo and brisk nature, power yoga is essentially like an aerobic workout, where yoga poses are done faster and in continuation. Power Yoga is a great way to combine the mental, physical, and spiritual benefits of yoga with high intensity, calorie-burning exercise. Power Yoga strengthens your body, increases flexibility, and promotes stamina and weight loss as well as improving posture and balance.
+                </p>
+            </ion-slide>
+            <br>
+
+            <ion-slide>
+              <img src="assets/img/Gym/zumba.jpg"/>
+              <button float-left ion-button clear (click)="prev()">
+                  <ion-icon name="arrow-back" style="color: black;"></ion-icon>
+                </button>
+                <button float-right ion-button clear (click)="next()">
+                  <ion-icon name="arrow-forward" style="color: black;"></ion-icon>
+                </button>    
+                <div style="text-align: center; padding-top: 30px;"><b>Zumba</b></div>
+                <p style="font-size: 13px;" padding>
+                  A Zumba class is like any other instructor-led workout, but with simple dance moves heavy on the hips and step counts. Those moves add up to a decent sweat, says John Porcari, a professor of exercise and sport science at the University of Wisconsin, La Crosse. He and his colleagues analyzed a group of women who were Zumba regulars and found that a 40-minute class burns about 370 calories, a little more than nine calories per minute.  Zumba classes are specially designed for weight loss, toning and sculpting the body with a trainer led group dance workout.
+                </p>
+            </ion-slide>
+            <br>
+
+            <ion-slide>
+              <img src="assets/img/Gym/kick.jpg"/>
+              <button float-left ion-button clear (click)="prev()">
+                  <ion-icon name="arrow-back" style="color: black;"></ion-icon>
+                </button>
+                <button float-right ion-button clear (click)="next()">
+                  <ion-icon name="arrow-forward" style="color: black;"></ion-icon>
+                </button>
+                <div style="text-align: center; padding-top: 30px; padding-right: 12px;"><b>Kick Boxing</b></div>
+                <p style="font-size: 13px;" padding>
+                  Kickboxing is a group of stand-up combat sports based on kicking and punching, historically developed from karate mixed with boxing. Kickboxing is practiced for self-defense, general fitness, or as a contact sport. At WayFit you can enjoy this as an additional fitness activity.
+                </p>
+            </ion-slide>
+            <br>
+
+            <ion-slide>
+              <img src="assets/img/Gym/gym.jpg"/>
+              <button float-left ion-button clear (click)="prev()">
+                <ion-icon name="arrow-back" style="color: black;"></ion-icon>
+              </button>
+              <div style="text-align: center; padding-top: 30px; padding-right: 45px;"><b>Gym</b></div>
+              <p style="font-size: 13px" padding>
+                Well equipped gym with ample exercise machines, cardio equipments and free weights and other facilities like cross-fit, functional training, kick-boxing etc.
+              </p>
+            </ion-slide>
+            <br>
+          </ion-slides>
+        </div>
+
+
+        <ion-list *ngSwitchCase="'facilities'" padding>
+
+          <div style="font-size: 16px; text-align: center; border-style: ridge"><b>Diet Café</b>
+          <p style="font-size: 13px; text-align: center">
+            Our Diet Café is where you can order food based on your diet plan. Various options available to pick and chose your diet items. With delivery option available within pune you need not have to carry your salads or other diet items to office. Just place an order online and we will deliver it to place you want within Pune City.
+          </p>
+          </div>
+
+          <br>
+          <div style="font-size: 16px; text-align: center; border-style: ridge"><b>Strength Training</b>
+          <p style="font-size: 13px; text-align: center">
+            Challenging your muscles 2 or 3 times each week with strength training / resistance training exercises is all that is needed to improve the strength and tone of your muscles – as well as gain you several long-term health benefits to your muscles, bones and general metabolism.
+          </p>
+          </div>
+
+          <br>
+          <div style="font-size: 16px; text-align: center; border-style: ridge"><b>Weight Loss</b>
+          <p style="font-size: 13px; text-align: center">
+            This weight loss program is healthy weight loss plan combined with regular exercise along with diet plan so that you lose weight steadily and safely. Better not to lose weight than losing it in wrong way.
+          </p>
+          </div>
+
+          <br>
+          <div style="font-size: 16px; text-align: center; border-style: ridge"><b>Personal Training</b>
+          <p style="font-size: 13px; text-align: center">
+            Personal coach & mentor – A certified trainer who will guide you at every step to achieve your goal.<br>
+            Customized plan – Every person is different with different body type, different goals and needs. You get customized plan to suite your unique requirement.
+          </p>
+          </div>
+
+        </ion-list>
+
+
+        <ion-list *ngSwitchCase="'features'">
+          <ion-card style="font-size: 16px; "><ion-card-header><b><u>Certified Coaches</u></b></ion-card-header>
+            <p style="font-size: 13px; padding-left: 20px; ">
+                Team of well trained & certified coaches who can guide you / help you during your fitness journey.
+            </p>
+          </ion-card>
+
+          <ion-card style="font-size: 16px; padding-top: 10px;"><ion-card-header><b><u>Fast Results</u></b></ion-card-header>
+            <p style="font-size: 13px; padding-left: 20px;">
+              With personalized guidance you achieve your fitness goal in lowest time frame.
+            </p>
+          </ion-card>
+
+          <ion-card style="font-size: 16px; padding-top: 10px;"><ion-card-header><b><u>Weight Training</u></b></ion-card-header>
+            <p style="font-size: 13px; padding-left: 20px;">
+              Well equipped gym with ample exercise machines, cardio equipments and free weights and other facilities like cross-fit, functional training, kick-boxing etc.
+            </p>
+          </ion-card>
+
+          <ion-card style="font-size: 16px; padding-top: 10px;"><ion-card-header><b><u>Nutrition Advice</u></b></ion-card-header>
+            <p style="font-size: 13px; padding-left: 20px;">
+              One of the important pillar of healthy life is good nutrition. Knowing what to take and getting it, both are equally important. At fitness galaxy, you have nutrition advice from experts and also availability of healthy nutrition from our café with delivery option available throughout the Pune city.
+            </p>
+          </ion-card>
+
+          <ion-card style="font-size: 16px; padding-top: 10px;"><ion-card-header><b><u>Personal Training</u></b></ion-card-header>
+            <p style="font-size: 13px; padding-left: 20px;">
+              Personal coach & mentor – A certified trainer who will guide you at every step to achieve your goal.
+            </p>
+          </ion-card>
+
+          <ion-card style="font-size: 16px; padding-top: 10px;"><ion-card-header><b><u>Body Composition Analysis</u></b></ion-card-header>
+            <p style="font-size: 13px; padding-left: 20px;">
+              You are thin that need not mean you are healthy. Know your body composition. Get detailed report of your BMI, fat and muscle percentage across your body, your resting metabolism, Body metabolic age etc. Know if you have any visceral fat which is above acceptable level.
+            </p>
+          </ion-card>
+          
+        </ion-list>
+      </div>
 </ion-content>

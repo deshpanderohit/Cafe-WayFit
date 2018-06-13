@@ -31,17 +31,19 @@
           <ion-icon item-start [name]="p.icon" [color]="isActive(p)"></ion-icon>
           {{p.title}}
         </button>
+        <button ion-item menuClose (click)="about()">
+          <ion-icon item-start name="call"></ion-icon>
+          Contact Us
+        </button>
       </ion-list>
 
-      <ion-list>
+<!--      <ion-list>
         <ion-list-header>
           Contact
         </ion-list-header>
-        <button ion-item menuClose (click)="about()">
-          <ion-icon item-start name="information-circle"></ion-icon>
-          About Us
-        </button>
+  
       </ion-list>
+-->
     </ion-content>
 
   </ion-menu>
@@ -76,18 +78,18 @@
           <ion-icon item-start [name]="p.icon" [color]="isActive(p)"></ion-icon>
           {{p.title}}
         </button>
-      </ion-list>
-
-      <ion-list>
-        <ion-list-header>
-          Contact
-        </ion-list-header>
         <button ion-item menuClose (click)="about()">
-          <ion-icon item-start name="information-circle"></ion-icon>
-          About Us
+          <ion-icon item-start name="call"></ion-icon>
+          Contact Us
         </button>
       </ion-list>
 
+<!--      <ion-list>
+        <ion-list-header>
+          Contact
+        </ion-list-header>
+      </ion-list>
+-->
     </ion-content>
 
   </ion-menu>
