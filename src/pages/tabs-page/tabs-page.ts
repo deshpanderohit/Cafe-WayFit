@@ -9,6 +9,7 @@ import { SpeakerListPage } from '../speaker-list/speaker-list';
 
 import { UserData } from '../../providers/user-data';
 import { AboutPage } from '../about/about';
+import { Storage } from '@ionic/storage';
 
 @Component({
   templateUrl: 'tabs-page.html'
@@ -23,23 +24,26 @@ export class TabsPage {
   tab4Root: any = AboutPage;
   mySelectedIndex: number;
   badge: any;
+  
 
-  constructor(navParams: NavParams, public events: Events, public userData: UserData) {
+  constructor(navParams: NavParams, public events: Events, public userData: UserData, public storage: Storage) {
     this.mySelectedIndex = navParams.data.tabIndex || 0;
+
+/*    this.events.subscribe('cart:updated', (count) => {
+      this.cartCount = count;
+    });
+*/
   }
 
   @ViewChild(Content) content: Content;
-  
 
-  scroll() {
-    this.content.scrollToTop();
-    
-    //this.tab1Root.scroll();
-
-    //this.events.publish('scrollToTop');
-  }
 
   ionViewDidEnter() {
+  }
+
+  cartCount() {
+    //let count = this.storage.get('cartCount');
+    //return count;
   }
 
 

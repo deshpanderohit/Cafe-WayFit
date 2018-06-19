@@ -1,0 +1,78 @@
+{
+  "_from": "git+https://github.com/katzer/cordova-plugin-badge.git",
+  "_id": "cordova-plugin-badge@0.8.7",
+  "_inBundle": false,
+  "_location": "/cordova-plugin-badge",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "git",
+    "raw": "https://github.com/katzer/cordova-plugin-badge.git",
+    "rawSpec": "https://github.com/katzer/cordova-plugin-badge.git",
+    "saveSpec": "git+https://github.com/katzer/cordova-plugin-badge.git",
+    "fetchSpec": "https://github.com/katzer/cordova-plugin-badge.git",
+    "gitCommittish": null
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "git+https://github.com/katzer/cordova-plugin-badge.git#8d9da75f6faad24fdc904f1c1c5a3361cf030bdf",
+  "_spec": "https://github.com/katzer/cordova-plugin-badge.git",
+  "_where": "/root/project/WayFit",
+  "author": {
+    "name": "Sebastián Katzer"
+  },
+  "bugs": {
+    "url": "https://github.com/katzer/cordova-plugin-badge/issues"
+  },
+  "bundleDependencies": false,
+  "cordova": {
+    "id": "cordova-plugin-badge",
+    "platforms": [
+      "ios",
+      "osx",
+      "android",
+      "browser",
+      "windows"
+    ]
+  },
+  "deprecated": false,
+  "description": "Shows the count of unread messages as a badge on the app icon.",
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=6.0.0"
+    },
+    {
+      "name": "apple-ios",
+      "version": ">=10.0.0"
+    },
+    {
+      "name": "cordova-android",
+      "version": ">=4"
+    },
+    {
+      "name": "cordova-plugman",
+      "version": ">=4.2.0"
+    }
+  ],
+  "homepage": "https://github.com/katzer/cordova-plugin-badge#readme",
+  "keywords": [
+    "appplant",
+    "badge",
+    "shortcutbadger",
+    "ecosystem:cordova",
+    "cordova-ios",
+    "cordova-osx",
+    "cordova-android",
+    "cordova-browser",
+    "cordova-windows"
+  ],
+  "license": "Apache 2.0",
+  "name": "cordova-plugin-badge",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/katzer/cordova-plugin-badge.git"
+  },
+  "version": "0.8.7"
+}

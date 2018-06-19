@@ -1,6 +1,6 @@
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import { LoadingController } from 'ionic-angular';
+import { LoadingController, ActionSheetController } from 'ionic-angular';
 
 import { ConferenceData } from '../../providers/conference-data';
 import { UserData } from '../../providers/user-data';
@@ -23,6 +23,9 @@ export class MapPage implements OnInit {
   static total = 0;
   temp: any;
   itemList: any = [];
+  drawerOptions: any;
+  toppings: any = [];
+  top: any;
 
   myModalOptions: ModalOptions = {
     enableBackdropDismiss: false,
@@ -40,6 +43,7 @@ export class MapPage implements OnInit {
               public toastCtrl: ToastController,
               public navCtrl: NavController,
               public modalCtrl: ModalController,
+              public actionSheetCtrl: ActionSheetController,
               public userData: UserData
             ) {
                 this.getMealsData();
@@ -51,30 +55,32 @@ export class MapPage implements OnInit {
                   duration: 200
                 });
                 loader.present();
-          
-  
-            }
+
+              }
 
   ngOnInit() {}
 
   ionViewWillEnter() {
     this.getMealsData();
-    
+    this.userData.getToppings().then(data => {
+      this.top = data;
+    })
+
   }
 
   getMealsData() {
     this.userData.hasLoggedIn().then(data => {
-        if(data) {
-          this.userData.getMeals().then(data => {
-            this.items = data;
-          });      
-        }
-        else {
-          this.userData.getMeals().then(data => {
-            this.items = data;
-            
-          });      
-        }
+      if(data) {
+        this.userData.getMeals().then(data => {
+          this.items = data;
+        });      
+      }
+      else {
+        this.userData.getMeals().then(data => {
+          this.items = data;
+          
+        });      
+      }
     })
   }
 
@@ -104,8 +110,6 @@ export class MapPage implements OnInit {
         this.itemList[index].quantity = item.quantity;
         this.storage.set('meal',JSON.stringify(this.itemList));
       });
-
-      
     }
   }
 
@@ -217,4 +221,39 @@ export class MapPage implements OnInit {
     this.navCtrl.setRoot(SchedulePage);
   }
   */
+
+  customise(item: any) {
+    if(item == 'Pancakes') {
+/*        this.userData.getToppings().then(data => {
+        this.toppings = data;
+      })
+*/
+      let actionSheet = this.actionSheetCtrl.create({
+        title: item,
+        cssClass: 'action-sheet',
+        buttons:[{
+          text:'Change Toppings',
+          handler: () => {
+
+          }
+        }]
+
+      });
+      actionSheet.present();  
+    }
+    else if(item == 'Combo of any 4') {
+      let actionSheet = this.actionSheetCtrl.create({
+        title: item,
+        cssClass: 'action-sheet',
+        buttons:[{
+          text:'Change Meal Options',
+          handler: () => {
+
+          }
+        }]
+
+      });
+      actionSheet.present();        
+    }
+  }
 }

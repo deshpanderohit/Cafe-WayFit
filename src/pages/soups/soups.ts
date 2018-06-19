@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage,AlertController, NavController, NavParams, ModalController, ModalOptions, ToastController, ViewController } from 'ionic-angular';
+import { IonicPage,AlertController, NavController, NavParams, ModalController, ModalOptions, ToastController, ViewController, Events } from 'ionic-angular';
 
 import { MealsdataProvider } from '../../providers/mealsdata/mealsdata';
 import { UserData } from '../../providers/user-data';
@@ -31,6 +31,7 @@ export class SoupsPage {
   id: any;
   data: any
   categories: any;
+  count = 0;
 
 
   myModalOptions: ModalOptions = {
@@ -45,6 +46,7 @@ export class SoupsPage {
               public modalCtrl: ModalController,
               public toastCtrl: ToastController,
               public userData: UserData,
+              public events: Events,
               public alertCtrl: AlertController) {
     
     
@@ -84,8 +86,6 @@ export class SoupsPage {
         return o;
     })
   }
-
-
 
   description(ev:any,item: any) {
 
@@ -128,6 +128,7 @@ export class SoupsPage {
           else {
 
             this.userData.addToCart(item);
+            //this.events.publish('cart:updated',++this.count);
 
             if(this.toast != null) 
               this.toast.dismiss();

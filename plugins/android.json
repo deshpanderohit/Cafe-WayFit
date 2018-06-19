@@ -41,6 +41,12 @@
     },
     "cordova-plugin-geolocation": {
       "PACKAGE_NAME": "io.ionic.conferenceapp"
+    },
+    "cordova-plugin-badge": {
+      "PACKAGE_NAME": "io.ionic.conferenceapp"
+    },
+    "cordova-plugin-actionsheet": {
+      "PACKAGE_NAME": "io.ionic.conferenceapp"
     }
   },
   "dependent_plugins": {}

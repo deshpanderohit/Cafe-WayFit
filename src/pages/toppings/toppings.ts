@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController, ModalOptions, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, ModalOptions, ToastController, Events } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import { UserData } from '../../providers/user-data';
@@ -28,15 +28,15 @@ export class ToppingsPage {
 
   item: any = [];
   topping: any = [];
+  count = 0;
   meal: any = [];
   data: Array<{ id: string, tops: string }> = [];
   tid: string;
   toast: any;
   itemList: any = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,  public viewCtrl: ViewController, public storage: Storage, public userData: UserData, public toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,  public viewCtrl: ViewController, public storage: Storage, public userData: UserData, public toastCtrl: ToastController, public events: Events) {
     this.item = navParams.get("meal");
-    
   }
 
   ionViewDidLoad() {
@@ -44,7 +44,7 @@ export class ToppingsPage {
   }
 
   dismiss() {
-    this.viewCtrl.dismiss();    
+    this.viewCtrl.dismiss();
     //this.navCtrl.setRoot(MapPage);
   }
 
@@ -80,8 +80,11 @@ export class ToppingsPage {
               this.storage.set('meal',JSON.stringify(this.itemList));
             }
             else {
-              this.itemList = this.itemList.concat(this.item);
-
+              if(!(this.itemList.some(a => a.prod_name.includes(this.item.prod_name)))) {
+                this.itemList = this.itemList.concat(this.item);
+                this.storage.set('meal',JSON.stringify(this.itemList));
+              }
+              else {
           //console.log("Meals: "+JSON.stringify(this.itemList));
 
           var index;
@@ -95,10 +98,13 @@ export class ToppingsPage {
           this.itemList[index].quantity = this.item.quantity;
           //console.log("Item List: "+JSON.stringify(this.itemList[index]));
 
+          //this.storage.set('cartCount',JSON.stringify(this.itemList.length));
           this.storage.set('meal',JSON.stringify(this.itemList));
+          }
         }
       }
     }); 
+    //this.events.publish('cart:updated',++this.count);
   } 
 
      this.viewCtrl.dismiss();
@@ -138,7 +144,7 @@ export class ToppingsPage {
             console.log("Meals: "+JSON.stringify(this.itemList));
 
             var index;
-            this.itemList.some(function(entry, i){
+            this.itemList.some(function(entry, i) {
               if( entry.prod_name == "Combo of any 4" ) {
                 index = i;
                 return true;
@@ -148,11 +154,12 @@ export class ToppingsPage {
             this.itemList[index].quantity = this.item.quantity;
             console.log("Item List: "+JSON.stringify(this.itemList[index]));
 
+            //this.storage.set('cartCount',JSON.stringify(this.itemList.length));
             this.storage.set('meal',JSON.stringify(this.itemList));
           }
         }); 
       }
-    
+      //this.events.publish('cart:updated',++this.count);
     } 
       this.viewCtrl.dismiss();
     }

@@ -62,6 +62,22 @@ module.exports = [
     "file": "plugins/cordova-plugin-geolocation/www/PositionError.js",
     "pluginId": "cordova-plugin-geolocation",
     "runs": true
+  },
+  {
+    "id": "cordova-plugin-badge.Badge",
+    "file": "plugins/cordova-plugin-badge/www/badge.js",
+    "pluginId": "cordova-plugin-badge",
+    "clobbers": [
+      "cordova.plugins.notification.badge"
+    ]
+  },
+  {
+    "id": "cordova-plugin-actionsheet.ActionSheet",
+    "file": "plugins/cordova-plugin-actionsheet/www/ActionSheet.js",
+    "pluginId": "cordova-plugin-actionsheet",
+    "clobbers": [
+      "window.plugins.actionsheet"
+    ]
   }
 ];
 module.exports.metadata = 
@@ -76,7 +92,9 @@ module.exports.metadata =
   "cordova-plugin-ionic-webview": "1.2.1",
   "cordova-plugin-statusbar": "2.4.2",
   "cordova-plugin-ionic-keyboard": "2.0.5",
-  "cordova-plugin-geolocation": "4.0.1"
+  "cordova-plugin-geolocation": "4.0.1",
+  "cordova-plugin-badge": "0.8.7",
+  "cordova-plugin-actionsheet": "2.3.3"
 };
 // BOTTOM OF METADATA
 });

@@ -18,7 +18,7 @@ export class UserData {
   mealFlag = 't'
   meal: any = [];
   temp: any = [];
-  
+  count = 0;
 
   constructor(
     public events: Events,
@@ -91,6 +91,7 @@ export class UserData {
         if(!(this.product.some(a => a.prod_name.includes(item.prod_name))))
           this.product = this.product.concat(item);
         
+        //this.storage.set('cartCount',JSON.stringify(this.product.length));
         this.storage.set('meal',JSON.stringify(this.product));
     }); 
   }

@@ -1,11 +1,12 @@
 <ion-content has-footer="true" has-tabs="true">
 
-<ion-tabs [selectedIndex]="mySelectedIndex" name="conference" mode="md" tabsPlacement="bottom">
-  <ion-tab class="top-44" [root]="tab1Root" tabIcon="nutrition" (ionSelect)="scroll()" tabUrlPath="conference-schedule"></ion-tab>
-  <ion-tab class="top-44" [root]="tab2Root" tabIcon="clipboard"></ion-tab>
-  <ion-tab class="top-44" [root]="tab3Root" tabIcon="cart"></ion-tab>
-  <ion-tab class="top-44" [root]="tab4Root" tabIcon="information-circle"></ion-tab>
-</ion-tabs>
+  <ion-tabs [selectedIndex]="mySelectedIndex" name="conference" mode="md" tabsPlacement="bottom">
+    <ion-tab class="top-44" [root]="tab1Root" tabIcon="nutrition" tabUrlPath="conference-schedule"></ion-tab>
+    <ion-tab class="top-44" [root]="tab2Root" tabIcon="clipboard"></ion-tab>
+    <ion-tab class="top-44" [root]="tab3Root" tabIcon="cart" [tabBadge]="cartCount()"></ion-tab>
+    <ion-tab class="top-44" [root]="tab4Root" tabIcon="information-circle"></ion-tab>
+  </ion-tabs>
+  
 </ion-content>
 
 
