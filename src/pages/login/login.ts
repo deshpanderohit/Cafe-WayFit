@@ -15,7 +15,6 @@ import { SignupPage } from '../signup/signup';
 import { TabsPage } from '../tabs-page/tabs-page';
 
 
-
 @Component({
   selector: 'page-user',
   templateUrl: 'login.html'

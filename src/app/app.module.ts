@@ -37,7 +37,7 @@ import { ToppingsPage } from '../pages/toppings/toppings';
 import { AddressPage } from '../pages/address/address';
 import { OrderPage } from '../pages/order/order';
 import { ContactPage } from '../pages/contact/contact';
-
+import { NewToppingsPage } from '../pages/new-toppings/new-toppings';
 
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
@@ -49,6 +49,7 @@ import { MealsdataProvider } from '../providers/mealsdata/mealsdata';
     ConferenceApp,
     CusthomePage,
     OrderPage,
+    NewToppingsPage,
     ContactPage,
     ItemsPage,
     OffersPage,
@@ -103,6 +104,7 @@ import { MealsdataProvider } from '../providers/mealsdata/mealsdata';
     CusthomePage,
     OffersPage,
     OrderPage,
+    NewToppingsPage,
     ContactPage,
     TimePage,
     AddressPage,

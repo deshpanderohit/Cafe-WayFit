@@ -34,6 +34,7 @@ export class ToppingsPage {
   tid: string;
   toast: any;
   itemList: any = [];
+  topArr: any = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,  public viewCtrl: ViewController, public storage: Storage, public userData: UserData, public toastCtrl: ToastController, public events: Events) {
     this.item = navParams.get("meal");
@@ -87,7 +88,31 @@ export class ToppingsPage {
               else {
           //console.log("Meals: "+JSON.stringify(this.itemList));
 
-          var index;
+                this.getTops().then(data => {
+                this.topArr = data;
+
+                if((this.topArr.includes(top))) {
+                  var index;
+                  this.itemList.some(function(entry, i) {
+                    if( entry.prod_name == "Pancakes" ) {
+                      index = i;
+                      return true;
+                    }
+                  });
+        
+                  this.itemList[index].quantity = this.item.quantity;
+                  //console.log("Item List: "+JSON.stringify(this.itemList[index]));
+        
+                  //this.storage.set('cartCount',JSON.stringify(this.itemList.length));
+                  this.storage.set('meal',JSON.stringify(this.itemList));
+                }
+                else {
+                  this.itemList = this.itemList.concat(this.item);
+                  this.storage.set('meal',JSON.stringify(this.itemList));     
+                }
+            })
+
+ /*         var index;
           this.itemList.some(function(entry, i){
             if( entry.prod_name == "Pancakes" ) {
               index = i;
@@ -100,6 +125,7 @@ export class ToppingsPage {
 
           //this.storage.set('cartCount',JSON.stringify(this.itemList.length));
           this.storage.set('meal',JSON.stringify(this.itemList));
+    */
           }
         }
       }

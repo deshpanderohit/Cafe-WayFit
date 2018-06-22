@@ -162,6 +162,7 @@ export class UserData {
         console.log("Pop 2: "+popped);
         //console.log("Remove item: "+array);
         this.toppingsFlag = 'f';
+        this.storage.remove('toppings');
         
       }
       else {

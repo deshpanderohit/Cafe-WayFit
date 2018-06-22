@@ -10,6 +10,7 @@ import { ToppingsPage } from '../toppings/toppings';
 import { Platform, NavParams, ViewController, NavController, ModalController, ModalOptions, ToastController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { Storage } from '@ionic/storage';
+import { NewToppingsPage } from '../new-toppings/new-toppings';
 //import { SchedulePage } from '../schedule/schedule';
 
 @Component({
@@ -25,7 +26,9 @@ export class MapPage implements OnInit {
   itemList: any = [];
   drawerOptions: any;
   toppings: any = [];
-  top: any;
+  top: any = [];
+  value: any = [];
+
 
   myModalOptions: ModalOptions = {
     enableBackdropDismiss: false,
@@ -64,8 +67,11 @@ export class MapPage implements OnInit {
     this.getMealsData();
     this.userData.getToppings().then(data => {
       this.top = data;
+      if(this.top) {
+        this.value = this.top.split(":");
+        console.log("Top Array: "+this.value);
+      }
     })
-
   }
 
   getMealsData() {
@@ -223,32 +229,24 @@ export class MapPage implements OnInit {
   */
 
   customise(item: any) {
-    if(item == 'Pancakes') {
+    
+    if(item.prod_name == 'Pancakes') {
 /*        this.userData.getToppings().then(data => {
         this.toppings = data;
       })
 */
-      let actionSheet = this.actionSheetCtrl.create({
-        title: item,
-        cssClass: 'action-sheet',
-        buttons:[{
-          text:'Change Toppings',
-          handler: () => {
+      let modal = this.modalCtrl.create(NewToppingsPage,{meal: item},this.myModalOptions);
+      modal.present();
 
-          }
-        }]
-
-      });
-      actionSheet.present();  
     }
-    else if(item == 'Combo of any 4') {
+    else if(item.prod_name == 'Combo of any 4') {
       let actionSheet = this.actionSheetCtrl.create({
-        title: item,
+        title: item.prod_name,
         cssClass: 'action-sheet',
         buttons:[{
           text:'Change Meal Options',
           handler: () => {
-
+            
           }
         }]
 

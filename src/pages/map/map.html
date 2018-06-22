@@ -37,8 +37,8 @@
               </p>
               <p id="truncate" style="font-size: 13px; color:black;" *ngIf=" item.prod_name == 'Pancakes' || item.prod_name == 'Combo of any 4'">
                 <img alt="logo" height="15" src="assets/img/veg.png">{{ item?.prod_name }}<br>
-                <sub style="font-size: 11px; padding-left: 20px;">{{ top }}</sub><br>
-                <button ion-button clear (click)="customise(item.prod_name)" style="font-size: 11px;">Customise</button>
+                <sub style="font-size: 11px; padding-left: 20px;">{{ value }}</sub><br>
+                <button ion-button clear (click)="customise(item)" style="font-size: 11px; padding-left: 20px;">Customise</button>
               </p>
             </ion-col>
           

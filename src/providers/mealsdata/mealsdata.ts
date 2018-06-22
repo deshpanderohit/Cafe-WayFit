@@ -23,7 +23,7 @@ export class MealsdataProvider {
   }
 
   getCategories() {
-    return this.http.get('http://wayfit.in/API/IndexDiet.php?request=categoryList').map(res => res.json());
+    return this.http.get('http://wayfit.in/API/IndexDiet.php?request=categoryList').map(result => result.json());
   }
 
   getTracks() {
