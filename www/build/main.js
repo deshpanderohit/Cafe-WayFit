@@ -196,6 +196,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 //import { MapPage } from '../map/map';
+//import { MapPage } from '../map/map';
 /**
  * Generated class for the ToppingsPage page.
  *
@@ -237,18 +238,31 @@ var ToppingsPage = (function () {
         //var panTop = JSON.stringify(top);
         if (top != "") {
             this.getTops().then(function (data) {
+                _this.tid = 1;
                 if (data) {
-                    _this.topping = data;
-                    _this.topping = _this.topping.concat("{" + top + "}:");
-                    console.log("Toppings: " + _this.topping);
-                    _this.storage.set('toppings', JSON.stringify(_this.topping));
+                    /*this.topping = data;
+                    this.topping.push(top);
+                    
+                    console.log("Toppings: "+this.topping);
+                    this.storage.set('toppings',JSON.stringify(this.topping));
+                    */
+                    _this.tid++;
+                    _this.data = data;
+                    _this.data.push({ id: _this.tid++, tops: top });
+                    _this.storage.set('toppings', JSON.stringify(_this.data));
                 }
                 else {
-                    _this.topping = "{" + top + "}:";
-                    _this.storage.set('toppings', JSON.stringify(_this.topping));
+                    /*this.topping = top;
+                    this.topping.push(top);
+                    this.storage.set('toppings',JSON.stringify(this.topping));
+                    */
+                    _this.data.push({ id: _this.tid, tops: top });
+                    _this.tid++;
+                    _this.storage.set('toppings', JSON.stringify(_this.data));
                 }
             });
-            this.item.quantity++;
+            if (this.item.quantity == 0)
+                this.item.quantity++;
             console.log("Items: " + JSON.stringify(this.item));
             if (this.item.quantity >= 1) {
                 this.userData.getMeals().then(function (data) {
@@ -257,16 +271,19 @@ var ToppingsPage = (function () {
                         if (_this.itemList.length == 0) {
                             _this.itemList.push(_this.item);
                             _this.storage.set('meal', JSON.stringify(_this.itemList));
+                            _this.viewCtrl.dismiss();
                         }
                         else {
                             if (!(_this.itemList.some(function (a) { return a.prod_name.includes(_this.item.prod_name); }))) {
                                 _this.itemList = _this.itemList.concat(_this.item);
                                 _this.storage.set('meal', JSON.stringify(_this.itemList));
+                                _this.viewCtrl.dismiss();
                             }
                             else {
                                 //console.log("Meals: "+JSON.stringify(this.itemList));
                                 _this.getTops().then(function (data) {
                                     _this.topArr = data;
+                                    console.log("Top Array: " + JSON.stringify(_this.topArr));
                                     if ((_this.topArr.includes(top))) {
                                         var index;
                                         _this.itemList.some(function (entry, i) {
@@ -275,14 +292,18 @@ var ToppingsPage = (function () {
                                                 return true;
                                             }
                                         });
+                                        console.log("Hello If");
                                         _this.itemList[index].quantity = _this.item.quantity;
                                         //console.log("Item List: "+JSON.stringify(this.itemList[index]));
                                         //this.storage.set('cartCount',JSON.stringify(this.itemList.length));
                                         _this.storage.set('meal', JSON.stringify(_this.itemList));
+                                        _this.viewCtrl.dismiss();
                                     }
                                     else {
+                                        console.log("Hello Else");
                                         _this.itemList = _this.itemList.concat(_this.item);
                                         _this.storage.set('meal', JSON.stringify(_this.itemList));
+                                        _this.viewCtrl.dismiss();
                                     }
                                 });
                                 /*         var index;
@@ -305,7 +326,6 @@ var ToppingsPage = (function () {
                 });
                 //this.events.publish('cart:updated',++this.count);
             }
-            this.viewCtrl.dismiss();
         }
         else if (combo != "") {
             this.getMeal().then(function (data) {
@@ -2809,15 +2829,17 @@ var MapPage = (function () {
         this.modalCtrl = modalCtrl;
         this.actionSheetCtrl = actionSheetCtrl;
         this.userData = userData;
+        this.items = [];
         this.itemList = [];
         this.toppings = [];
         this.top = [];
         this.value = [];
+        this.data = [];
         this.myModalOptions = {
             enableBackdropDismiss: false,
             cssClass: 'pricebreakup'
         };
-        this.getMealsData();
+        //this.getMealsData();
         //this.showTotal();
         MapPage_1.total = 0;
         var loader = this.loadingCtrl.create({
@@ -2830,26 +2852,51 @@ var MapPage = (function () {
     MapPage.prototype.ngOnInit = function () { };
     MapPage.prototype.ionViewWillEnter = function () {
         var _this = this;
-        this.getMealsData();
         this.userData.getToppings().then(function (data) {
             _this.top = data;
-            if (_this.top) {
-                _this.value = _this.top.split(":");
-                console.log("Top Array: " + _this.value);
-            }
+            console.log("Data: " + JSON.stringify(_this.top));
+            _this.getMealsData(_this.top);
+            //      this.value = this.top[0].tops;
+            //      console.log("Value: "+this.value);
+            /*
+                this.data = this.items.map(function(e1) {
+                  var o = Object.assign({},e1);
+                  if(o.prod_name == "Pancakes" || o.prod_name == "Combo of any 4")
+                    o.quantity = "0";
+                  else
+                    o.quantity = "1";
+                  o.total = "0";
+            
+                  return o;
+                })
+            */
         });
     };
-    MapPage.prototype.getMealsData = function () {
+    MapPage.prototype.getMealsData = function (top) {
         var _this = this;
         this.userData.hasLoggedIn().then(function (data) {
             if (data) {
-                _this.userData.getMeals().then(function (data) {
-                    _this.items = data;
+                _this.userData.getMeals().then(function (mdata) {
+                    if (mdata)
+                        _this.items = mdata;
+                    _this.data = _this.items.map(function (e1) {
+                        var o = Object.assign({}, e1);
+                        if (o.prod_name == "Pancakes" || o.prod_name == "Combo of any 4")
+                            o.toppings = "";
+                        return o;
+                    });
+                    var i = 0;
+                    _this.data.forEach(function (value) {
+                        if (value.prod_name == "Pancakes" || value.prod_name == "Combo of any 4") {
+                            value.toppings = top[i++].tops;
+                        }
+                    });
+                    console.log("Data: " + JSON.stringify(_this.data));
                 });
             }
             else {
                 _this.userData.getMeals().then(function (data) {
-                    _this.items = data;
+                    _this.data = data;
                 });
             }
         });
@@ -2860,6 +2907,7 @@ var MapPage = (function () {
         if (item.prod_name == "Pancakes" || item.prod_name == "Combo of any 4") {
             var modal = this.modalCtrl.create(__WEBPACK_IMPORTED_MODULE_6__toppings_toppings__["a" /* ToppingsPage */], { meal: item }, this.myModalOptions);
             modal.present();
+            this.navCtrl.setRoot(MapPage_1);
         }
         else {
             item.quantity++;
@@ -2924,7 +2972,7 @@ var MapPage = (function () {
         });
         this.userData.hasLoggedIn().then(function (data) {
             if (data) {
-                _this.getMealsData();
+                //this.getMealsData();
                 //console.log("Meals: "+JSON.stringify(meals));
                 _this.storage.remove('meal');
                 _this.storage.set('meal', JSON.stringify(meals));
@@ -2996,16 +3044,27 @@ var MapPage = (function () {
     MapPage.total = 0;
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])('mapCanvas'),
-        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */]) === "function" && _a || Object)
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */])
     ], MapPage.prototype, "mapElement", void 0);
     MapPage = MapPage_1 = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-map',template:/*ion-inline-start:"/root/project/WayFit/src/pages/map/map.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Cart\n    &nbsp;<ion-icon end name="cart"></ion-icon>\n  </ion-title>\n<!--    <button ion-button end>\n      <ion-icon name="ios-cart-outline" style="position: relative; font-weight: bold; font-size: 2em" color="white">\n        <ion-badge style="position:absolute; font-weight: bold; top:-5px; left:9px; font-size: 9px" color="danger">2</ion-badge>\n      </ion-icon>\n    </button>\n-->\n  </ion-navbar>\n</ion-header>\n\n<ion-content style="background-color: #dde3ec;">\n\n  <div *ngIf="items!==null; else empty">\n  <ion-row padding style="font-size: 15px;">\n    <ion-col col-7><b>Recipes</b></ion-col>\n    <ion-col col-3><b>Quantity</b></ion-col>\n    <ion-col col-2><b>Price</b></ion-col>\n  </ion-row>\n    <ion-list style="padding: 7px;">\n      <ion-item-sliding *ngFor="let item of items">\n        <ion-item>\n          <ion-row>\n          \n            <ion-col col-7>\n              <p id="truncate" style="font-size:13px; color:black;" *ngIf=" item.V == \'Y\' && item.prod_name !== \'Pancakes\' && item.prod_name !== \'Combo of any 4\' ">\n                <img alt="logo" height="15" src="assets/img/veg.png">{{ item?.prod_name }}\n              </p>\n              <p id="truncate" style="font-size:13px; color:black;" *ngIf=" item.V == \'N\' ">\n                <img alt="logo" height="15" src="assets/img/non-veg.png">{{ item?.prod_name }}\n              </p>\n              <p id="truncate" style="font-size: 13px; color:black;" *ngIf=" item.prod_name == \'Pancakes\' || item.prod_name == \'Combo of any 4\'">\n                <img alt="logo" height="15" src="assets/img/veg.png">{{ item?.prod_name }}<br>\n                <sub style="font-size: 11px; padding-left: 20px;">{{ value }}</sub><br>\n                <button ion-button clear (click)="customise(item)" style="font-size: 11px; padding-left: 20px;">Customise</button>\n              </p>\n            </ion-col>\n          \n            <ion-col col-3 style="padding-top: 8px;">\n              <ion-icon name="remove-circle" style="font-size:16px;" (click)="decrement($event,item)"></ion-icon>\n                {{ item.quantity }}\n              <ion-icon name="add-circle" style="font-size:16px;" (click)="increment($event,item)"></ion-icon>\n            </ion-col>\n\n            <ion-col col-2 style="padding-top: 8px;">\n              <p ng-model="total" style="font-size:13px; color:black;"> \n                <img alt="logo" height="11" src="assets/img/rupee-indian.png" >{{ item.mrp * item.quantity }}\n              </p>\n            </ion-col>\n  \n          </ion-row>\n      </ion-item>\n\n<!--      <div padding>\n        <h3>Grand Total : {{  }}</h3>\n      </div>\n    -->      \n    </ion-item-sliding>\n    </ion-list>\n\n    <div padding>\n      <button ion-button full color="facebook" (click)="order(items)">Confirm Order</button> \n    </div>\n  </div>\n\n  <ng-template #empty>\n    <h2 style="text-align: center">Your Cart is Empty!</h2>\n<!--    <div padding style="text-align: center;">\n    <button ion-button clear (click)="home()">Continue Shopping</button>\n  </div>\n-->  \n  </ng-template>\n\n</ion-content>'/*ion-inline-end:"/root/project/WayFit/src/pages/map/map.html"*/
+            selector: 'page-map',template:/*ion-inline-start:"/root/project/WayFit/src/pages/map/map.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Cart\n    &nbsp;<ion-icon end name="cart"></ion-icon>\n  </ion-title>\n<!--    <button ion-button end>\n      <ion-icon name="ios-cart-outline" style="position: relative; font-weight: bold; font-size: 2em" color="white">\n        <ion-badge style="position:absolute; font-weight: bold; top:-5px; left:9px; font-size: 9px" color="danger">2</ion-badge>\n      </ion-icon>\n    </button>\n-->\n  </ion-navbar>\n</ion-header>\n\n<ion-content style="background-color: #dde3ec;">\n\n  <div *ngIf="items!=null; else empty">\n  <ion-row padding style="font-size: 15px;">\n    <ion-col col-7><b>Recipes</b></ion-col>\n    <ion-col col-3><b>Quantity</b></ion-col>\n    <ion-col col-2><b>Price</b></ion-col>\n  </ion-row>\n    <ion-list style="padding: 7px;">\n      <ion-item-sliding *ngFor="let item of data">\n        \n        <ion-item>\n          <ion-row>\n              \n            <ion-col col-7>\n              <p id="truncate" style="font-size:13px; color:black;" *ngIf=" item.V == \'Y\' && item.prod_name !== \'Pancakes\' && item.prod_name !== \'Combo of any 4\' ">\n                <img alt="logo" height="15" src="assets/img/veg.png">{{ item?.prod_name }}\n              </p>\n              <p id="truncate" style="font-size:13px; color:black;" *ngIf=" item.V == \'N\' ">\n                <img alt="logo" height="15" src="assets/img/non-veg.png">{{ item?.prod_name }}\n              </p>\n              \n              <p id="truncate" style="font-size: 13px; color:black;" *ngIf=" item.prod_name == \'Pancakes\' || item.prod_name == \'Combo of any 4\'">\n                <img alt="logo" height="15" src="assets/img/veg.png">{{ item?.prod_name }}<br>\n                <sub style="font-size: 11px; padding-left: 20px;">{{ item?.toppings }}</sub><br><p></p>\n<!--                <button ion-button clear (click)="customise(item)" style="font-size: 11px; padding-left: 20px;">Customise</button>  -->\n              </p>\n            </ion-col>\n          \n            <ion-col col-3 style="padding-top: 8px;">\n              <ion-icon name="remove-circle" style="font-size:16px;" (click)="decrement($event,item)"></ion-icon>\n                {{ item.quantity }}\n              <ion-icon name="add-circle" style="font-size:16px;" (click)="increment($event,item)"></ion-icon>\n            </ion-col>\n\n            <ion-col col-2 style="padding-top: 8px;">\n              <p ng-model="total" style="font-size:13px; color:black;"> \n                <img alt="logo" height="11" src="assets/img/rupee-indian.png" >{{ item.mrp * item.quantity }}\n              </p>\n            </ion-col>\n          \n          </ion-row>\n      </ion-item>\n    \n<!--      <div padding>\n        <h3>Grand Total : {{  }}</h3>\n      </div>\n    -->      \n    </ion-item-sliding>\n    </ion-list>\n\n    <div padding>\n      <button ion-button full color="facebook" (click)="order(data)">Confirm Order</button> \n    </div>\n  </div>\n\n  <ng-template #empty>\n    <h2 style="text-align: center">Your Cart is Empty!</h2>\n<!--    <div padding style="text-align: center;">\n    <button ion-button clear (click)="home()">Continue Shopping</button>\n  </div>\n-->  \n  </ng-template>\n\n</ion-content>'/*ion-inline-end:"/root/project/WayFit/src/pages/map/map.html"*/
         }),
-        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__providers_conference_data__["a" /* ConferenceData */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_conference_data__["a" /* ConferenceData */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["q" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["q" /* Platform */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["p" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["p" /* NavParams */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["u" /* ViewController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["u" /* ViewController */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_8__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__ionic_storage__["b" /* Storage */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_1__angular_common__["e" /* Location */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_common__["e" /* Location */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* LoadingController */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["t" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["t" /* ToastController */]) === "function" && _j || Object, typeof (_k = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["o" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["o" /* NavController */]) === "function" && _k || Object, typeof (_l = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["m" /* ModalController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["m" /* ModalController */]) === "function" && _l || Object, typeof (_m = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* ActionSheetController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* ActionSheetController */]) === "function" && _m || Object, typeof (_o = typeof __WEBPACK_IMPORTED_MODULE_4__providers_user_data__["a" /* UserData */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__providers_user_data__["a" /* UserData */]) === "function" && _o || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__providers_conference_data__["a" /* ConferenceData */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["q" /* Platform */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["p" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["u" /* ViewController */],
+            __WEBPACK_IMPORTED_MODULE_8__ionic_storage__["b" /* Storage */],
+            __WEBPACK_IMPORTED_MODULE_1__angular_common__["e" /* Location */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* LoadingController */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["t" /* ToastController */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["o" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["m" /* ModalController */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* ActionSheetController */],
+            __WEBPACK_IMPORTED_MODULE_4__providers_user_data__["a" /* UserData */]])
     ], MapPage);
     return MapPage;
-    var MapPage_1, _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o;
+    var MapPage_1;
 }());
 
 //# sourceMappingURL=map.js.map

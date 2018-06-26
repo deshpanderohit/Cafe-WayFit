@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ViewController, ModalOptions, Toas
 import { Storage } from '@ionic/storage';
 
 import { UserData } from '../../providers/user-data';
+//import { MapPage } from '../map/map';
 
 
 //import { MapPage } from '../map/map';
@@ -27,11 +28,11 @@ export class ToppingsPage {
   };
 
   item: any = [];
-  topping: any = [];
+  topping: Array<string> = [];
   count = 0;
   meal: any = [];
-  data: Array<{ id: string, tops: string }> = [];
-  tid: string;
+  data: Array<{ id: number, tops: string }> = [];
+  tid: any;
   toast: any;
   itemList: any = [];
   topArr: any = [];
@@ -56,20 +57,33 @@ export class ToppingsPage {
     
     if(top!="") {
       this.getTops().then(data => {
+        this.tid = 1;
         if(data) {
-          this.topping = data;
-          this.topping = this.topping.concat("{"+top+"}:");
+          /*this.topping = data;
+          this.topping.push(top);
           
           console.log("Toppings: "+this.topping);
           this.storage.set('toppings',JSON.stringify(this.topping));
+          */
+          this.tid++
+          this.data = data;
+          this.data.push({id: this.tid++ , tops: top});
+          this.storage.set('toppings',JSON.stringify(this.data));
         }
         else {
-          this.topping = "{"+top+"}:";
+          /*this.topping = top;
+          this.topping.push(top);
           this.storage.set('toppings',JSON.stringify(this.topping));
+          */
+          
+          this.data.push({id: this.tid, tops: top});
+          this.tid++;
+          this.storage.set('toppings',JSON.stringify(this.data));
         }
       });
 
-      this.item.quantity++;
+      if(this.item.quantity == 0)
+        this.item.quantity++;
         
       console.log("Items: "+JSON.stringify(this.item));
       if(this.item.quantity >= 1) {
@@ -79,18 +93,23 @@ export class ToppingsPage {
             if(this.itemList.length == 0) {
               this.itemList.push(this.item);
               this.storage.set('meal',JSON.stringify(this.itemList));
+              this.viewCtrl.dismiss();
+          
             }
             else {
               if(!(this.itemList.some(a => a.prod_name.includes(this.item.prod_name)))) {
                 this.itemList = this.itemList.concat(this.item);
                 this.storage.set('meal',JSON.stringify(this.itemList));
+                this.viewCtrl.dismiss();
+            
               }
               else {
           //console.log("Meals: "+JSON.stringify(this.itemList));
 
                 this.getTops().then(data => {
                 this.topArr = data;
-
+                console.log("Top Array: "+JSON.stringify(this.topArr));
+                
                 if((this.topArr.includes(top))) {
                   var index;
                   this.itemList.some(function(entry, i) {
@@ -100,15 +119,21 @@ export class ToppingsPage {
                     }
                   });
         
+                  console.log("Hello If");
                   this.itemList[index].quantity = this.item.quantity;
                   //console.log("Item List: "+JSON.stringify(this.itemList[index]));
         
                   //this.storage.set('cartCount',JSON.stringify(this.itemList.length));
                   this.storage.set('meal',JSON.stringify(this.itemList));
+                  this.viewCtrl.dismiss();
+              
                 }
                 else {
+                  console.log("Hello Else");
                   this.itemList = this.itemList.concat(this.item);
-                  this.storage.set('meal',JSON.stringify(this.itemList));     
+                  this.storage.set('meal',JSON.stringify(this.itemList));
+                  this.viewCtrl.dismiss();
+                                
                 }
             })
 
@@ -132,8 +157,7 @@ export class ToppingsPage {
     }); 
     //this.events.publish('cart:updated',++this.count);
   } 
-
-     this.viewCtrl.dismiss();
+    
     }
     else if(combo!="") {
 

@@ -20,7 +20,7 @@ import { NewToppingsPage } from '../new-toppings/new-toppings';
 
 export class MapPage implements OnInit {
   
-  items: any;
+  items: any = [];
   static total = 0;
   temp: any;
   itemList: any = [];
@@ -28,6 +28,7 @@ export class MapPage implements OnInit {
   toppings: any = [];
   top: any = [];
   value: any = [];
+  data: any = [];
 
 
   myModalOptions: ModalOptions = {
@@ -49,7 +50,7 @@ export class MapPage implements OnInit {
               public actionSheetCtrl: ActionSheetController,
               public userData: UserData
             ) {
-                this.getMealsData();
+                //this.getMealsData();
                 //this.showTotal();
                 MapPage.total = 0;
 
@@ -64,26 +65,59 @@ export class MapPage implements OnInit {
   ngOnInit() {}
 
   ionViewWillEnter() {
-    this.getMealsData();
+    
     this.userData.getToppings().then(data => {
       this.top = data;
-      if(this.top) {
-        this.value = this.top.split(":");
-        console.log("Top Array: "+this.value);
-      }
+      console.log("Data: "+JSON.stringify(this.top));
+      this.getMealsData(this.top);
+//      this.value = this.top[0].tops;
+//      console.log("Value: "+this.value);
+      
+/*
+    this.data = this.items.map(function(e1) {
+      var o = Object.assign({},e1);
+      if(o.prod_name == "Pancakes" || o.prod_name == "Combo of any 4")
+        o.quantity = "0";
+      else
+        o.quantity = "1";
+      o.total = "0";
+
+      return o;
+    })
+*/
+
     })
   }
 
-  getMealsData() {
+  getMealsData(top: any) {
     this.userData.hasLoggedIn().then(data => {
       if(data) {
-        this.userData.getMeals().then(data => {
-          this.items = data;
-        });      
+        this.userData.getMeals().then(mdata => {
+          if(mdata)
+            this.items = mdata;
+
+          this.data = this.items.map(function(e1) {
+            var o = Object.assign({},e1);
+            if(o.prod_name == "Pancakes" || o.prod_name == "Combo of any 4")
+              o.toppings = "";
+
+            return o;
+          })
+
+          let i=0;
+          this.data.forEach(value => {
+            if(value.prod_name == "Pancakes" || value.prod_name == "Combo of any 4") {
+              value.toppings = top[i++].tops;
+            }
+          })
+
+          console.log("Data: "+JSON.stringify(this.data));
+
+        });
       }
       else {
         this.userData.getMeals().then(data => {
-          this.items = data;
+          this.data = data;
           
         });      
       }
@@ -97,6 +131,7 @@ export class MapPage implements OnInit {
     if(item.prod_name == "Pancakes" || item.prod_name == "Combo of any 4") {
       let modal = this.modalCtrl.create(ToppingsPage, {meal: item}, this.myModalOptions);
       modal.present();
+      this.navCtrl.setRoot(MapPage);
     }
     else {
       item.quantity++;
@@ -177,7 +212,7 @@ export class MapPage implements OnInit {
     this.userData.hasLoggedIn().then(data => {
 
       if(data) {
-        this.getMealsData();
+        //this.getMealsData();
         //console.log("Meals: "+JSON.stringify(meals));
 
         this.storage.remove('meal');
