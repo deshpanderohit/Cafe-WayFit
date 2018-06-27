@@ -238,7 +238,7 @@ var ToppingsPage = (function () {
         //var panTop = JSON.stringify(top);
         if (top != "") {
             this.getTops().then(function (data) {
-                _this.tid = 1;
+                _this.tid = 0;
                 if (data) {
                     /*this.topping = data;
                     this.topping.push(top);
@@ -246,9 +246,14 @@ var ToppingsPage = (function () {
                     console.log("Toppings: "+this.topping);
                     this.storage.set('toppings',JSON.stringify(this.topping));
                     */
-                    _this.tid++;
                     _this.data = data;
-                    _this.data.push({ id: _this.tid++, tops: top });
+                    _this.data.forEach(function (value) {
+                        if (value.tops == top)
+                            _this.tid = value.count + 1;
+                        else
+                            _this.tid = 1;
+                    });
+                    _this.data.push({ count: _this.tid, tops: top });
                     _this.storage.set('toppings', JSON.stringify(_this.data));
                 }
                 else {
@@ -256,8 +261,8 @@ var ToppingsPage = (function () {
                     this.topping.push(top);
                     this.storage.set('toppings',JSON.stringify(this.topping));
                     */
-                    _this.data.push({ id: _this.tid, tops: top });
                     _this.tid++;
+                    _this.data.push({ count: _this.tid, tops: top });
                     _this.storage.set('toppings', JSON.stringify(_this.data));
                 }
             });
@@ -284,27 +289,30 @@ var ToppingsPage = (function () {
                                 _this.getTops().then(function (data) {
                                     _this.topArr = data;
                                     console.log("Top Array: " + JSON.stringify(_this.topArr));
-                                    if ((_this.topArr.includes(top))) {
-                                        var index;
-                                        _this.itemList.some(function (entry, i) {
-                                            if (entry.prod_name == "Pancakes") {
-                                                index = i;
-                                                return true;
-                                            }
-                                        });
-                                        console.log("Hello If");
-                                        _this.itemList[index].quantity = _this.item.quantity;
-                                        //console.log("Item List: "+JSON.stringify(this.itemList[index]));
-                                        //this.storage.set('cartCount',JSON.stringify(this.itemList.length));
-                                        _this.storage.set('meal', JSON.stringify(_this.itemList));
-                                        _this.viewCtrl.dismiss();
-                                    }
-                                    else {
-                                        console.log("Hello Else");
-                                        _this.itemList = _this.itemList.concat(_this.item);
-                                        _this.storage.set('meal', JSON.stringify(_this.itemList));
-                                        _this.viewCtrl.dismiss();
-                                    }
+                                    _this.topArr.forEach(function (value) {
+                                        if (value.tops == top) {
+                                            //if((this.topArr.includes(top))) {
+                                            var index;
+                                            _this.itemList.some(function (entry, i) {
+                                                if (entry.prod_name == "Pancakes") {
+                                                    index = i;
+                                                    return true;
+                                                }
+                                            });
+                                            console.log("Hello If");
+                                            _this.itemList[index].quantity = _this.item.quantity;
+                                            //console.log("Item List: "+JSON.stringify(this.itemList[index]));
+                                            //this.storage.set('cartCount',JSON.stringify(this.itemList.length));
+                                            _this.storage.set('meal', JSON.stringify(_this.itemList));
+                                            _this.viewCtrl.dismiss();
+                                        }
+                                        else {
+                                            console.log("Hello Else");
+                                            _this.itemList = _this.itemList.concat(_this.item);
+                                            _this.storage.set('meal', JSON.stringify(_this.itemList));
+                                            _this.viewCtrl.dismiss();
+                                        }
+                                    });
                                 });
                                 /*         var index;
                                          this.itemList.some(function(entry, i){
@@ -387,10 +395,9 @@ var ToppingsPage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-toppings',template:/*ion-inline-start:"/root/project/WayFit/src/pages/toppings/toppings.html"*/'<!--\n  Generated template for the ToppingsPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-toolbar>\n\n    <div *ngIf="item.prod_name == \'Pancakes\'">\n      <ion-title>Choose Topping</ion-title>\n    </div>\n\n    <div *ngIf="item.prod_name == \'Combo of any 4\'">\n      <ion-title>Choose your meal</ion-title>\n    </div>\n    \n      <ion-buttons start>\n        <button ion-button (click)="dismiss()">Cancel</button>\n      </ion-buttons>\n</ion-toolbar>  \n\n</ion-header>\n\n\n<ion-content padding style="padding-top: 15px">\n  <div *ngIf="item">\n  <ion-list>\n    <div *ngIf="item.prod_name == \'Pancakes\'">\n      <ion-item>\n          <ion-label style="font-size: 14px">Pancake Toppings</ion-label>\n            \n              <ion-select [(ngModel)]="topping">\n                  <ion-option [value]="maple">Maple Syrup</ion-option>\n                  <ion-option [value]="blueberry">Blueberry Syrup</ion-option>\n                  <ion-option [value]="fruit">Mix-Fruit Syrup</ion-option>\n                  <ion-option [value]="butter">Butter</ion-option>\n              </ion-select>\n      </ion-item>\n  </div>\n\n  <div *ngIf="item.prod_name == \'Combo of any 4\'">\n    <ion-item>\n        <ion-label style="font-size: 14px">Chooes your meal</ion-label>\n            <ion-select [(ngModel)]="meal" multiple>\n                <ion-option [value]="paneer">Grilled Paneer</ion-option>\n                <ion-option [value]="chicken">Grilled Chicken</ion-option>\n                <ion-option [value]="brice">Brown Rice</ion-option>\n                <ion-option [value]="wrice">White Rice</ion-option>\n                <ion-option [value]="vegies">Vegies</ion-option>\n                <ion-option [value]="spotato">Sweet Potato</ion-option>\n                <ion-option [value]="beans">Kidney Beans/ Mixed Beans</ion-option>                    \n            </ion-select>\n    </ion-item>\n  </div>\n</ion-list> \n\n  <div padding>\n    <button ion-button full (click)="getToppings(topping,meal)">Ok</button>\n  </div>\n</div>\n\n</ion-content>\n'/*ion-inline-end:"/root/project/WayFit/src/pages/toppings/toppings.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["u" /* ViewController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["u" /* ViewController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__providers_user_data__["a" /* UserData */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_user_data__["a" /* UserData */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["t" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["t" /* ToastController */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Events */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Events */]) === "function" && _g || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["u" /* ViewController */], __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_3__providers_user_data__["a" /* UserData */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["t" /* ToastController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Events */]])
     ], ToppingsPage);
     return ToppingsPage;
-    var _a, _b, _c, _d, _e, _f, _g;
 }());
 
 //# sourceMappingURL=toppings.js.map
@@ -521,7 +528,7 @@ var SchedulePage = (function () {
     ], SchedulePage.prototype, "content", void 0);
     SchedulePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-schedule',template:/*ion-inline-start:"/root/project/WayFit/src/pages/schedule/schedule.html"*/'<ion-header>\n  <ion-navbar no-border-bottom>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n\n    <ion-title style="text-align: center; padding-right: 10px;">\n      <img alt="logo" height="58" src="assets/img/Wayfit logo1.png" >\n    </ion-title>\n\n\n    <ion-buttons end>\n      <button ion-button icon-only (click)="presentFilter()">\n        <ion-icon ios="ios-options-outline" md="md-options"></ion-icon>\n      </button>\n    </ion-buttons>\n  </ion-navbar>\n\n  <ion-toolbar no-border-top>\n    <ion-searchbar color="primary"\n                   [(ngModel)]="queryText"\n                   (ionInput)="getItems($event)"\n                   placeholder="Search Diet">\n    </ion-searchbar>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n  <ion-grid style="margin-top:3px;">\n    <ion-row>\n      <ion-col class="col-12">\n\n      <ion-card *ngFor="let item of data" (click)="view(item)" style="padding-bottom: 6px;" >\n        <img class="full-image" src="assets/img/Food/{{item.cat_name}}.png"/>\n        <div class="card-title" style="font-size: 15px">{{ item?.cat_name }}</div>\n      </ion-card>\n\n      </ion-col>\n  	</ion-row>\n  </ion-grid>\n\n\n<!--  <ion-fab bottom right #fab>\n    <button ion-fab mini><ion-icon name="share"></ion-icon></button>\n    <ion-fab-list side="top">\n      <button ion-fab color="vimeo" (click)="openSocial(\'Vimeo\', fab)"><ion-icon name="logo-vimeo"></ion-icon></button>\n      <button ion-fab color="google" (click)="openSocial(\'Google+\', fab)"><ion-icon name="logo-googleplus"></ion-icon></button>\n      <button ion-fab color="twitter" (click)="openSocial(\'Twitter\', fab)"><ion-icon name="logo-twitter"></ion-icon></button>\n      <button ion-fab color="facebook" (click)="openSocial(\'Facebook\', fab)"><ion-icon name="logo-facebook"></ion-icon></button>\n    </ion-fab-list>\n  </ion-fab>\n\n\n  <button ion-button clear (click)="scroll()" float-right style="padding-right: 30px" >Go to top</button>\n-->\n</ion-content>\n'/*ion-inline-end:"/root/project/WayFit/src/pages/schedule/schedule.html"*/
+            selector: 'page-schedule',template:/*ion-inline-start:"/root/project/WayFit/src/pages/schedule/schedule.html"*/'<ion-header>\n  <ion-navbar no-border-bottom>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n\n    <ion-title style="text-align: center; padding-right: 10px;">\n      <img alt="logo" height="58" src="assets/img/Wayfit logo1.png" >\n    </ion-title>\n\n\n    <ion-buttons end>\n      <button ion-button icon-only (click)="presentFilter()">\n        <ion-icon ios="ios-options-outline" md="md-options"></ion-icon>\n      </button>\n    </ion-buttons>\n  </ion-navbar>\n\n  <ion-toolbar no-border-top>\n    <ion-searchbar color="primary"\n                   [(ngModel)]="queryText"\n                   (ionInput)="getItems($event)"\n                   placeholder="Search Diet">\n    </ion-searchbar>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n  <ion-grid>\n    <ion-row>\n      <ion-col class="col-12">\n\n      <ion-card *ngFor="let item of data" (click)="view(item)">\n        <img class="full-image" src="assets/img/Food/{{item.cat_name}}.png"/>\n        <div class="card-title" style="font-size: 15px">{{ item?.cat_name }}</div>\n      </ion-card>\n\n      </ion-col>\n  	</ion-row>\n  </ion-grid>\n\n\n<!--  <ion-fab bottom right #fab>\n    <button ion-fab mini><ion-icon name="share"></ion-icon></button>\n    <ion-fab-list side="top">\n      <button ion-fab color="vimeo" (click)="openSocial(\'Vimeo\', fab)"><ion-icon name="logo-vimeo"></ion-icon></button>\n      <button ion-fab color="google" (click)="openSocial(\'Google+\', fab)"><ion-icon name="logo-googleplus"></ion-icon></button>\n      <button ion-fab color="twitter" (click)="openSocial(\'Twitter\', fab)"><ion-icon name="logo-twitter"></ion-icon></button>\n      <button ion-fab color="facebook" (click)="openSocial(\'Facebook\', fab)"><ion-icon name="logo-facebook"></ion-icon></button>\n    </ion-fab-list>\n  </ion-fab>\n\n\n  <button ion-button clear (click)="scroll()" float-right style="padding-right: 30px" >Go to top</button>\n-->\n</ion-content>\n'/*ion-inline-end:"/root/project/WayFit/src/pages/schedule/schedule.html"*/
         }),
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */],
@@ -2854,7 +2861,7 @@ var MapPage = (function () {
         var _this = this;
         this.userData.getToppings().then(function (data) {
             _this.top = data;
-            console.log("Data: " + JSON.stringify(_this.top));
+            //console.log("Data: "+JSON.stringify(this.top));
             _this.getMealsData(_this.top);
             //      this.value = this.top[0].tops;
             //      console.log("Value: "+this.value);
@@ -2892,6 +2899,8 @@ var MapPage = (function () {
                         }
                     });
                     console.log("Data: " + JSON.stringify(_this.data));
+                    if (_this.data.length == 0)
+                        _this.data = null;
                 });
             }
             else {
@@ -3048,7 +3057,7 @@ var MapPage = (function () {
     ], MapPage.prototype, "mapElement", void 0);
     MapPage = MapPage_1 = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-map',template:/*ion-inline-start:"/root/project/WayFit/src/pages/map/map.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Cart\n    &nbsp;<ion-icon end name="cart"></ion-icon>\n  </ion-title>\n<!--    <button ion-button end>\n      <ion-icon name="ios-cart-outline" style="position: relative; font-weight: bold; font-size: 2em" color="white">\n        <ion-badge style="position:absolute; font-weight: bold; top:-5px; left:9px; font-size: 9px" color="danger">2</ion-badge>\n      </ion-icon>\n    </button>\n-->\n  </ion-navbar>\n</ion-header>\n\n<ion-content style="background-color: #dde3ec;">\n\n  <div *ngIf="items!=null; else empty">\n  <ion-row padding style="font-size: 15px;">\n    <ion-col col-7><b>Recipes</b></ion-col>\n    <ion-col col-3><b>Quantity</b></ion-col>\n    <ion-col col-2><b>Price</b></ion-col>\n  </ion-row>\n    <ion-list style="padding: 7px;">\n      <ion-item-sliding *ngFor="let item of data">\n        \n        <ion-item>\n          <ion-row>\n              \n            <ion-col col-7>\n              <p id="truncate" style="font-size:13px; color:black;" *ngIf=" item.V == \'Y\' && item.prod_name !== \'Pancakes\' && item.prod_name !== \'Combo of any 4\' ">\n                <img alt="logo" height="15" src="assets/img/veg.png">{{ item?.prod_name }}\n              </p>\n              <p id="truncate" style="font-size:13px; color:black;" *ngIf=" item.V == \'N\' ">\n                <img alt="logo" height="15" src="assets/img/non-veg.png">{{ item?.prod_name }}\n              </p>\n              \n              <p id="truncate" style="font-size: 13px; color:black;" *ngIf=" item.prod_name == \'Pancakes\' || item.prod_name == \'Combo of any 4\'">\n                <img alt="logo" height="15" src="assets/img/veg.png">{{ item?.prod_name }}<br>\n                <sub style="font-size: 11px; padding-left: 20px;">{{ item?.toppings }}</sub><br><p></p>\n<!--                <button ion-button clear (click)="customise(item)" style="font-size: 11px; padding-left: 20px;">Customise</button>  -->\n              </p>\n            </ion-col>\n          \n            <ion-col col-3 style="padding-top: 8px;">\n              <ion-icon name="remove-circle" style="font-size:16px;" (click)="decrement($event,item)"></ion-icon>\n                {{ item.quantity }}\n              <ion-icon name="add-circle" style="font-size:16px;" (click)="increment($event,item)"></ion-icon>\n            </ion-col>\n\n            <ion-col col-2 style="padding-top: 8px;">\n              <p ng-model="total" style="font-size:13px; color:black;"> \n                <img alt="logo" height="11" src="assets/img/rupee-indian.png" >{{ item.mrp * item.quantity }}\n              </p>\n            </ion-col>\n          \n          </ion-row>\n      </ion-item>\n    \n<!--      <div padding>\n        <h3>Grand Total : {{  }}</h3>\n      </div>\n    -->      \n    </ion-item-sliding>\n    </ion-list>\n\n    <div padding>\n      <button ion-button full color="facebook" (click)="order(data)">Confirm Order</button> \n    </div>\n  </div>\n\n  <ng-template #empty>\n    <h2 style="text-align: center">Your Cart is Empty!</h2>\n<!--    <div padding style="text-align: center;">\n    <button ion-button clear (click)="home()">Continue Shopping</button>\n  </div>\n-->  \n  </ng-template>\n\n</ion-content>'/*ion-inline-end:"/root/project/WayFit/src/pages/map/map.html"*/
+            selector: 'page-map',template:/*ion-inline-start:"/root/project/WayFit/src/pages/map/map.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Cart\n    &nbsp;<ion-icon end name="cart"></ion-icon>\n  </ion-title>\n<!--    <button ion-button end>\n      <ion-icon name="ios-cart-outline" style="position: relative; font-weight: bold; font-size: 2em" color="white">\n        <ion-badge style="position:absolute; font-weight: bold; top:-5px; left:9px; font-size: 9px" color="danger">2</ion-badge>\n      </ion-icon>\n    </button>\n-->\n  </ion-navbar>\n</ion-header>\n\n<ion-content style="background-color: #dde3ec;">\n\n  <div *ngIf="data!=null; else empty">\n  <ion-row padding style="font-size: 15px;">\n    <ion-col col-7><b>Recipes</b></ion-col>\n    <ion-col col-3><b>Quantity</b></ion-col>\n    <ion-col col-2><b>Price</b></ion-col>\n  </ion-row>\n    <ion-list style="padding: 7px;">\n      <ion-item-sliding *ngFor="let item of data">\n        \n        <ion-item>\n          <ion-row>\n              \n            <ion-col col-7>\n              <p id="truncate" style="font-size:13px; color:black;" *ngIf=" item.V == \'Y\' && item.prod_name !== \'Pancakes\' && item.prod_name !== \'Combo of any 4\' ">\n                <img alt="logo" height="15" src="assets/img/veg.png">{{ item?.prod_name }}\n              </p>\n              <p id="truncate" style="font-size:13px; color:black;" *ngIf=" item.V == \'N\' ">\n                <img alt="logo" height="15" src="assets/img/non-veg.png">{{ item?.prod_name }}\n              </p>\n              \n              <p id="truncate" style="font-size: 13px; color:black;" *ngIf=" item.prod_name == \'Pancakes\' || item.prod_name == \'Combo of any 4\'">\n                <img alt="logo" height="15" src="assets/img/veg.png">{{ item?.prod_name }}<br>\n                <sub style="font-size: 11px; padding-left: 20px;">{{ item?.toppings }}</sub><br><p></p>\n<!--                <button ion-button clear (click)="customise(item)" style="font-size: 11px; padding-left: 20px;">Customise</button>  -->\n              </p>\n            </ion-col>\n          \n            <ion-col col-3 style="padding-top: 8px;">\n              <ion-icon name="remove-circle" style="font-size:16px;" (click)="decrement($event,item)"></ion-icon>\n                {{ item.quantity }}\n              <ion-icon name="add-circle" style="font-size:16px;" (click)="increment($event,item)"></ion-icon>\n            </ion-col>\n\n            <ion-col col-2 style="padding-top: 8px;">\n              <p ng-model="total" style="font-size:13px; color:black;"> \n                <img alt="logo" height="11" src="assets/img/rupee-indian.png" >{{ item.mrp * item.quantity }}\n              </p>\n            </ion-col>\n          \n          </ion-row>\n      </ion-item>\n    \n<!--      <div padding>\n        <h3>Grand Total : {{  }}</h3>\n      </div>\n    -->      \n    </ion-item-sliding>\n    </ion-list>\n\n    <div padding>\n      <button ion-button full color="facebook" (click)="order(data)">Confirm Order</button> \n    </div>\n  </div>\n\n  <ng-template #empty>\n    <h2 style="text-align: center">Your Cart is Empty!</h2>\n<!--    <div padding style="text-align: center;">\n    <button ion-button clear (click)="home()">Continue Shopping</button>\n  </div>\n-->  \n  </ng-template>\n\n</ion-content>'/*ion-inline-end:"/root/project/WayFit/src/pages/map/map.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__providers_conference_data__["a" /* ConferenceData */],
             __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["q" /* Platform */],

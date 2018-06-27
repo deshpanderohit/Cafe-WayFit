@@ -68,7 +68,7 @@ export class MapPage implements OnInit {
     
     this.userData.getToppings().then(data => {
       this.top = data;
-      console.log("Data: "+JSON.stringify(this.top));
+      //console.log("Data: "+JSON.stringify(this.top));
       this.getMealsData(this.top);
 //      this.value = this.top[0].tops;
 //      console.log("Value: "+this.value);
@@ -95,7 +95,7 @@ export class MapPage implements OnInit {
         this.userData.getMeals().then(mdata => {
           if(mdata)
             this.items = mdata;
-
+          
           this.data = this.items.map(function(e1) {
             var o = Object.assign({},e1);
             if(o.prod_name == "Pancakes" || o.prod_name == "Combo of any 4")
@@ -112,7 +112,8 @@ export class MapPage implements OnInit {
           })
 
           console.log("Data: "+JSON.stringify(this.data));
-
+          if(this.data.length == 0) 
+            this.data = null;
         });
       }
       else {

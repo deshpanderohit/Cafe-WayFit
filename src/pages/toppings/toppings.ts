@@ -31,7 +31,7 @@ export class ToppingsPage {
   topping: Array<string> = [];
   count = 0;
   meal: any = [];
-  data: Array<{ id: number, tops: string }> = [];
+  data: Array<{ count: number, tops: string }> = [];
   tid: any;
   toast: any;
   itemList: any = [];
@@ -57,7 +57,7 @@ export class ToppingsPage {
     
     if(top!="") {
       this.getTops().then(data => {
-        this.tid = 1;
+        this.tid = 0;
         if(data) {
           /*this.topping = data;
           this.topping.push(top);
@@ -65,9 +65,16 @@ export class ToppingsPage {
           console.log("Toppings: "+this.topping);
           this.storage.set('toppings',JSON.stringify(this.topping));
           */
-          this.tid++
+          
           this.data = data;
-          this.data.push({id: this.tid++ , tops: top});
+          this.data.forEach(value => {
+            if(value.tops == top)
+              this.tid = value.count+1;
+            else
+              this.tid=1;
+          })
+            
+          this.data.push({count: this.tid , tops: top});
           this.storage.set('toppings',JSON.stringify(this.data));
         }
         else {
@@ -75,9 +82,8 @@ export class ToppingsPage {
           this.topping.push(top);
           this.storage.set('toppings',JSON.stringify(this.topping));
           */
-          
-          this.data.push({id: this.tid, tops: top});
           this.tid++;
+          this.data.push({count: this.tid, tops: top});
           this.storage.set('toppings',JSON.stringify(this.data));
         }
       });
@@ -89,6 +95,7 @@ export class ToppingsPage {
       if(this.item.quantity >= 1) {
         this.userData.getMeals().then(data => {
           this.itemList = data;
+
         if(top) {
             if(this.itemList.length == 0) {
               this.itemList.push(this.item);
@@ -105,36 +112,41 @@ export class ToppingsPage {
               }
               else {
           //console.log("Meals: "+JSON.stringify(this.itemList));
-
+                
                 this.getTops().then(data => {
                 this.topArr = data;
                 console.log("Top Array: "+JSON.stringify(this.topArr));
                 
-                if((this.topArr.includes(top))) {
-                  var index;
-                  this.itemList.some(function(entry, i) {
-                    if( entry.prod_name == "Pancakes" ) {
-                      index = i;
-                      return true;
+                this.topArr.forEach(value => {
+
+                  if(value.tops == top) {
+                    //if((this.topArr.includes(top))) {
+                      var index;
+                      this.itemList.some(function(entry, i) {
+                        if( entry.prod_name == "Pancakes" ) {
+                          index = i;
+                          return true;
+                        }
+                      });
+            
+                      console.log("Hello If");
+                      this.itemList[index].quantity = this.item.quantity;
+                      //console.log("Item List: "+JSON.stringify(this.itemList[index]));
+            
+                      //this.storage.set('cartCount',JSON.stringify(this.itemList.length));
+                      this.storage.set('meal',JSON.stringify(this.itemList));
+                      this.viewCtrl.dismiss();
+                  
                     }
-                  });
-        
-                  console.log("Hello If");
-                  this.itemList[index].quantity = this.item.quantity;
-                  //console.log("Item List: "+JSON.stringify(this.itemList[index]));
-        
-                  //this.storage.set('cartCount',JSON.stringify(this.itemList.length));
-                  this.storage.set('meal',JSON.stringify(this.itemList));
-                  this.viewCtrl.dismiss();
-              
-                }
-                else {
-                  console.log("Hello Else");
-                  this.itemList = this.itemList.concat(this.item);
-                  this.storage.set('meal',JSON.stringify(this.itemList));
-                  this.viewCtrl.dismiss();
-                                
-                }
+                    else {
+                      console.log("Hello Else");
+                      this.itemList = this.itemList.concat(this.item);
+                      this.storage.set('meal',JSON.stringify(this.itemList));
+                      this.viewCtrl.dismiss();
+                                    
+                    }
+    
+                })
             })
 
  /*         var index;
