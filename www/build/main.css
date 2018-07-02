@@ -43991,6 +43991,7 @@ ion-item[track=beverages] .dot {
 }
 
 page-soups {
+  will-change: auto;
   /*
     .item ion-thumbnail {
       min-width: 5rem;    

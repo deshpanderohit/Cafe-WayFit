@@ -17,7 +17,7 @@
 
 <ion-content style="background-color: #dde3ec;">
 
-  <div *ngIf="data!=null; else empty">
+  <div *ngIf="data!=null || top!=null; else empty">
   <ion-row padding style="font-size: 15px;">
     <ion-col col-7><b>Recipes</b></ion-col>
     <ion-col col-3><b>Quantity</b></ion-col>
@@ -30,14 +30,14 @@
           <ion-row>
               
             <ion-col col-7>
-              <p id="truncate" style="font-size:13px; color:black;" *ngIf=" item.V == 'Y' && item.prod_name !== 'Pancakes' && item.prod_name !== 'Combo of any 4' ">
+              <p id="truncate" style="font-size:13px; color:black;" *ngIf=" item.V == 'Y' && item.prod_name !== 'Pancakes'">
                 <img alt="logo" height="15" src="assets/img/veg.png">{{ item?.prod_name }}
               </p>
               <p id="truncate" style="font-size:13px; color:black;" *ngIf=" item.V == 'N' ">
                 <img alt="logo" height="15" src="assets/img/non-veg.png">{{ item?.prod_name }}
               </p>
               
-              <p id="truncate" style="font-size: 13px; color:black;" *ngIf=" item.prod_name == 'Pancakes' || item.prod_name == 'Combo of any 4'">
+              <p id="truncate" style="font-size: 13px; color:black;" *ngIf=" item.prod_name == 'Pancakes'">
                 <img alt="logo" height="15" src="assets/img/veg.png">{{ item?.prod_name }}<br>
                 <sub style="font-size: 11px; padding-left: 20px;">{{ item?.toppings }}</sub><br><p></p>
 <!--                <button ion-button clear (click)="customise(item)" style="font-size: 11px; padding-left: 20px;">Customise</button>  -->

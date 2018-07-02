@@ -111,9 +111,10 @@ export class MapPage implements OnInit {
             }
           })
 
-          console.log("Data: "+JSON.stringify(this.data));
+          //console.log("Data: "+JSON.stringify(this.data));
           if(this.data.length == 0) 
             this.data = null;
+          this.storage.set('meal',JSON.stringify(this.data));
         });
       }
       else {
@@ -132,7 +133,7 @@ export class MapPage implements OnInit {
     if(item.prod_name == "Pancakes" || item.prod_name == "Combo of any 4") {
       let modal = this.modalCtrl.create(ToppingsPage, {meal: item}, this.myModalOptions);
       modal.present();
-      this.navCtrl.setRoot(MapPage);
+      
     }
     else {
       item.quantity++;

@@ -144,46 +144,43 @@ export class UserData {
     });
   }
 
-
   removeToppings(item: any) {
     console.log("Item: "+item);
     this.getToppings().then(data => {
       this.topping = data;
 
-      if(this.toppingsFlag == 't') {
-//        console.log("Pancake Toppings: "+this.topping);
-
-        var array = this.topping.split(":");
-        var pop = array.pop();
-        var popped = array.pop();
-
-        this.storage.set('toppings',JSON.stringify(array));
-        console.log("Pop 1: "+pop);
-        console.log("Pop 2: "+popped);
-        //console.log("Remove item: "+array);
-        this.toppingsFlag = 'f';
-        this.storage.remove('toppings');
-        
+/*      this.topping.forEach(value => {
+        if(value.tops == item.toppings) {
+          if(value.count > 1 ) {
+            value.count--;
+          }
+          else if(value.count == 1) {
+            var pop = this.topping.pop();
+            console.log("Pop 1: "+JSON.stringify(pop));
+          }
+          this.storage.set('toppings',JSON.stringify(this.topping));
+        }
+      })
+*/
+      if(this.topping.length > 1) {
+        var pop = this.topping.pop();
+        this.storage.set('toppings',JSON.stringify(this.topping));
+        console.log("Pop 1: "+JSON.stringify(pop));
       }
       else {
         if(this.topping.length == 1) {
           var t = this.topping.pop();
-          console.log("Popped: "+t);
+          console.log("Popped: "+JSON.stringify(t));
           this.storage.remove('toppings');
           this.toppingsFlag = 't';
-        }
-        else {
-          t = this.topping.pop();
-          console.log("Popped: "+t);
-          this.storage.set('toppings',JSON.stringify(this.topping));
         }
       }
 
     });
+  
   }
 
   removeMealData(item: any) {
-
     console.log("Meal Data: "+item);
 
     this.getMealData().then(data => {
