@@ -90,13 +90,16 @@ export class MapPage implements OnInit {
   }
 
   getMealsData(top: any) {
+    console.log("Top Array: "+JSON.stringify(top));
     this.userData.hasLoggedIn().then(data => {
       if(data) {
         this.userData.getMeals().then(mdata => {
           if(mdata)
-            this.items = mdata;
+            this.data = mdata;
+
+            console.log("Cart Items: "+JSON.stringify(this.data));
           
-          this.data = this.items.map(function(e1) {
+/*          this.data = this.items.map(function(e1) {
             var o = Object.assign({},e1);
             if(o.prod_name == "Pancakes")
               o.toppings = "";
@@ -112,7 +115,7 @@ export class MapPage implements OnInit {
           })
 
           //console.log("Data: "+JSON.stringify(this.data));
-          if(this.data.length == 0) 
+*/        if(this.data.length == 0) 
             this.data = null;
           this.storage.set('meal',JSON.stringify(this.data));
         });

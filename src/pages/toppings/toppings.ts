@@ -106,6 +106,16 @@ export class ToppingsPage {
               if(!(this.itemList.some(a => a.prod_name.includes(this.item.prod_name)))) {
                 console.log("In Top Else If");
                 this.itemList = this.itemList.concat(this.item);
+          
+                var index;
+                this.itemList.some(function(entry, i) {
+                  if( entry.prod_name == "Pancakes") {
+                    index = i;
+                    return true;
+                  }
+                });
+
+                this.itemList[index].toppings = top;
                 this.storage.set('meal',JSON.stringify(this.itemList));
                 this.viewCtrl.dismiss();
               }
@@ -120,7 +130,7 @@ export class ToppingsPage {
                   console.log("Top Flag: "+this.topFlag);
                   if(this.topFlag == 't') {
                     
-                    var index;
+                    
                     this.itemList.some(function(entry, i) {
                       if( entry.prod_name == "Pancakes" && entry.toppings == top ) {
                         index = i;
@@ -131,6 +141,7 @@ export class ToppingsPage {
                     console.log("Index: "+index);
                     this.item.quantity++;
                     this.itemList[index].quantity = this.item.quantity;
+                    this.itemList[index].toppings = top;
                     console.log("Hello If");
                     this.storage.set('meal',JSON.stringify(this.itemList));                
                     this.viewCtrl.dismiss();

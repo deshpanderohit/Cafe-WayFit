@@ -77,8 +77,10 @@ export class SoupsPage {
     this.data = this.items;
     this.data = this.items.map(function(e1) {
         var o = Object.assign({},e1);
-        if(o.prod_name == "Pancakes" || o.prod_name == "Combo of any 4")
+        if(o.prod_name == "Pancakes" || o.prod_name == "Combo of any 4") {
           o.quantity = "0";
+          o.toppings = "";
+        }
         else
           o.quantity = "1";
         o.total = "0";
