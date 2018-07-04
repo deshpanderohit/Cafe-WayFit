@@ -98,7 +98,7 @@ export class MapPage implements OnInit {
           
           this.data = this.items.map(function(e1) {
             var o = Object.assign({},e1);
-            if(o.prod_name == "Pancakes" || o.prod_name == "Combo of any 4")
+            if(o.prod_name == "Pancakes")
               o.toppings = "";
 
             return o;
@@ -106,7 +106,7 @@ export class MapPage implements OnInit {
 
           let i=0;
           this.data.forEach(value => {
-            if(value.prod_name == "Pancakes" || value.prod_name == "Combo of any 4") {
+            if(value.prod_name == "Pancakes") {
               value.toppings = top[i++].tops;
             }
           })
@@ -160,7 +160,7 @@ export class MapPage implements OnInit {
     ev.stopPropagation();
 
     if(item.prod_name == "Pancakes") {
-      this.userData.removeToppings(item.prod_name);
+      this.userData.removeToppings(item);
     }
     else if(item.prod_name == "Combo of any 4") {
       this.userData.removeMealData(item.prod_name);

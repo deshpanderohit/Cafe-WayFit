@@ -144,28 +144,46 @@ export class UserData {
     });
   }
 
+  filter_array(arr: any) {
+    var index = -1;
+    var arr_length = arr ? arr.length : 0;
+    var restIndex = -1;
+    var result = [];
+
+    while(++index < arr_length) {
+      var value = arr[index];
+
+      if(value) {
+        result[++restIndex] = value;
+      }
+    }
+
+    return result;
+  }
+
   removeToppings(item: any) {
-    console.log("Item: "+item);
+    console.log("Item: "+JSON.stringify(item));
     this.getToppings().then(data => {
       this.topping = data;
 
-/*      this.topping.forEach(value => {
-        if(value.tops == item.toppings) {
-          if(value.count > 1 ) {
-            value.count--;
-          }
-          else if(value.count == 1) {
-            var pop = this.topping.pop();
-            console.log("Pop 1: "+JSON.stringify(pop));
-          }
-          this.storage.set('toppings',JSON.stringify(this.topping));
-        }
-      })
-*/
       if(this.topping.length > 1) {
+        let length = this.topping.length;
+        console.log("Topping Array: "+JSON.stringify(this.topping[length-1]));
+        while(length >= 0) {
+          if(this.topping[length-1].tops == item.toppings) {
+            delete this.topping[length-1];
+            this.topping = this.filter_array(this.topping);
+            this.storage.set('toppings',JSON.stringify(this.topping));
+            break;
+          }
+          else
+            length--;
+        }
+/*        
         var pop = this.topping.pop();
         this.storage.set('toppings',JSON.stringify(this.topping));
         console.log("Pop 1: "+JSON.stringify(pop));
+*/        
       }
       else {
         if(this.topping.length == 1) {

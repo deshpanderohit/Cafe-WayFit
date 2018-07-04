@@ -38,6 +38,7 @@ export class ToppingsPage {
   itemList: any = [];
   topArr: any = [];
   topFlag = 'f';
+  newItem: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,  public viewCtrl: ViewController, public storage: Storage, public userData: UserData, public toastCtrl: ToastController, public events: Events) {
     this.item = navParams.get("meal");
@@ -137,7 +138,10 @@ export class ToppingsPage {
                   }
                   else {
                     console.log("Hello Else");
-                    this.itemList = this.itemList.concat(this.item);
+                    this.newItem = this.item;
+                    this.newItem.quantity = "1";
+                    this.newItem.toppings = top;
+                    this.itemList = this.itemList.concat(this.newItem);
                     this.storage.set('meal',JSON.stringify(this.itemList));
                     this.viewCtrl.dismiss();
                   }
