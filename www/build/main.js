@@ -195,8 +195,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-//import { MapPage } from '../map/map';
-//import { MapPage } from '../map/map';
 /**
  * Generated class for the ToppingsPage page.
  *
@@ -231,8 +229,8 @@ var ToppingsPage = (function () {
     ToppingsPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad ToppingsPage');
     };
-    ToppingsPage.prototype.dismiss = function () {
-        this.viewCtrl.dismiss();
+    ToppingsPage.prototype.dismiss = function (data) {
+        this.viewCtrl.dismiss(data);
         //this.navCtrl.setRoot(MapPage);
     };
     ToppingsPage.prototype.getToppings = function (top, combo) {
@@ -272,7 +270,7 @@ var ToppingsPage = (function () {
                             console.log("In Top If");
                             _this.itemList.push(_this.item);
                             _this.storage.set('meal', JSON.stringify(_this.itemList));
-                            _this.viewCtrl.dismiss();
+                            _this.viewCtrl.dismiss(top);
                         }
                         else {
                             if (!(_this.itemList.some(function (a) { return a.prod_name.includes(_this.item.prod_name); }))) {
@@ -287,7 +285,7 @@ var ToppingsPage = (function () {
                                 });
                                 _this.itemList[index].toppings = top;
                                 _this.storage.set('meal', JSON.stringify(_this.itemList));
-                                _this.viewCtrl.dismiss();
+                                _this.viewCtrl.dismiss(top);
                             }
                             else {
                                 console.log("Top Array: " + JSON.stringify(_this.topArr));
@@ -310,7 +308,7 @@ var ToppingsPage = (function () {
                                     _this.itemList[index].toppings = top;
                                     console.log("Hello If");
                                     _this.storage.set('meal', JSON.stringify(_this.itemList));
-                                    _this.viewCtrl.dismiss();
+                                    _this.viewCtrl.dismiss(top);
                                 }
                                 else {
                                     console.log("Hello Else");
@@ -319,7 +317,7 @@ var ToppingsPage = (function () {
                                     _this.newItem.toppings = top;
                                     _this.itemList = _this.itemList.concat(_this.newItem);
                                     _this.storage.set('meal', JSON.stringify(_this.itemList));
-                                    _this.viewCtrl.dismiss();
+                                    _this.viewCtrl.dismiss(top);
                                 }
                             }
                         }
@@ -370,7 +368,7 @@ var ToppingsPage = (function () {
                 }
                 //this.events.publish('cart:updated',++this.count);
             }
-            this.viewCtrl.dismiss();
+            this.viewCtrl.dismiss(combo);
         }
     };
     ToppingsPage.prototype.getTops = function () {
@@ -703,6 +701,7 @@ var UserData = (function () {
         this.meal = [];
         this.temp = [];
         this.count = 0;
+        this.mealData = [];
         this.toppingsFlag = 't';
         this.mealFlag = 't';
     }
@@ -826,17 +825,17 @@ var UserData = (function () {
         this.getToppings().then(function (data) {
             _this.topping = data;
             if (_this.topping.length > 1) {
-                var length = _this.topping.length;
-                console.log("Topping Array: " + JSON.stringify(_this.topping[length - 1]));
-                while (length >= 0) {
-                    if (_this.topping[length - 1].tops == item.toppings) {
-                        delete _this.topping[length - 1];
+                var length_1 = _this.topping.length;
+                console.log("Topping Array: " + JSON.stringify(_this.topping[length_1 - 1]));
+                while (length_1 >= 0) {
+                    if (_this.topping[length_1 - 1].tops == item.toppings) {
+                        delete _this.topping[length_1 - 1];
                         _this.topping = _this.filter_array(_this.topping);
                         _this.storage.set('toppings', JSON.stringify(_this.topping));
                         break;
                     }
                     else
-                        length--;
+                        length_1--;
                 }
                 /*
                         var pop = this.topping.pop();
@@ -853,6 +852,32 @@ var UserData = (function () {
                 }
             }
         });
+        /*    this.getMeals().then(data => {
+              this.mealData = data;
+        
+              if(item.quantity>0 && item.quantity!=1) {
+                item.quantity--;
+                item.total = (item.quantity * item.mrp);
+        
+                var index;
+                this.mealData.some(function(entry, i) {
+                  if( entry.prod_name == "Pancakes" && entry.toppings == item.toppings) {
+                    index = i;
+                    return true;
+                  }
+                });
+        
+                this.mealData[index].quantity = item.quantity;
+                this.storage.set('meal',JSON.stringify(this.mealData));
+              }
+              else if(item.quantity == 1) {
+                item.quantity--;
+                item.total=0;
+                this.storage.remove('meal');
+                
+              }
+            })
+        */
     };
     UserData.prototype.removeMealData = function (item) {
         var _this = this;
@@ -911,10 +936,12 @@ var UserData = (function () {
     };
     UserData = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* Events */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* Events */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* LoadingController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */]) === "function" && _d || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* Events */],
+            __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* LoadingController */],
+            __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */]])
     ], UserData);
     return UserData;
-    var _a, _b, _c, _d;
 }());
 
 //# sourceMappingURL=user-data.js.map
@@ -1554,10 +1581,17 @@ var SoupsPage = (function () {
             selector: 'page-soups',template:/*ion-inline-start:"/root/project/WayFit/src/pages/soups/soups.html"*/'<!--\n  Generated template for the SoupsPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title><b>{{ value }}</b></ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding style="background-color: #dde3ec;" class="soups-bg">\n	<div>\n\n  <ion-searchbar color="primary"\n      [(ngModel)]="queryText"\n      (ionInput)="getMeal($event)"\n      placeholder="Search Meal">\n  </ion-searchbar>\n\n    <ion-list>\n      <ion-item-sliding *ngFor="let item of data">\n        <ion-item (click)="description($event,item)">\n<!--    <ion-thumbnail item-start>\n          <img src="">\n        </ion-thumbnail>\n-->        \n        <span class="p-tag">{{ item?.prod_name }}</span>\n          <p style="color:green; padding-left: 20px;" *ngIf=" item.V == \'Y\' ">\n            <img alt="logo" height="16" src="assets/img/veg.png">Veg\n          </p>\n          <p style="color:red; padding-left: 20px;" *ngIf=" item.V == \'N\' ">\n            <img alt="logo" height="16" src="assets/img/non-veg.png">Non-Veg\n          </p>\n\n          <p style="color:black; padding-left: 20px;">\n            <img alt="logo" height="11" src="assets/img/rupee-indian.png" >{{ item?.mrp }}/-\n          </p>\n       \n\n      <button class="addButton" ion-button clear item-end (click)="add($event,item)">Add</button>\n    </ion-item>\n  </ion-item-sliding>\n    \n    </ion-list>\n \n \n \n \n \n<!--    <ion-grid paddding>\n      <ion-row text-center>\n        <ion-col>\n  \n        <ion-card *ngFor="let item of items" (click)="order(item)">\n            <img src=""/>\n            <div class="card-title">{{ item?.prod_name }}</div>\n            <div class="card-subtitle">\n                <p *ngIf=" item.V == \'Y\' ">Veg</p>\n                <p *ngIf=" item.V == \'N\' ">Non-Veg</p>\n            </div>\n            <div>\n              Rs. {{ item?.mrp }}\n            </div>\n            \n        </ion-card>\n        <br>\n        </ion-col>\n      </ion-row>\n    </ion-grid>\n  -->\n    \n	</div>\n</ion-content>\n'/*ion-inline-end:"/root/project/WayFit/src/pages/soups/soups.html"*/,
             providers: [__WEBPACK_IMPORTED_MODULE_2__providers_mealsdata_mealsdata__["a" /* MealsdataProvider */]],
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["u" /* ViewController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["u" /* ViewController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__providers_mealsdata_mealsdata__["a" /* MealsdataProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_mealsdata_mealsdata__["a" /* MealsdataProvider */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ModalController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ModalController */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["t" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["t" /* ToastController */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_3__providers_user_data__["a" /* UserData */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_user_data__["a" /* UserData */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Events */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Events */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */]) === "function" && _j || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["u" /* ViewController */],
+            __WEBPACK_IMPORTED_MODULE_2__providers_mealsdata_mealsdata__["a" /* MealsdataProvider */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ModalController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["t" /* ToastController */],
+            __WEBPACK_IMPORTED_MODULE_3__providers_user_data__["a" /* UserData */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Events */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */]])
     ], SoupsPage);
     return SoupsPage;
-    var _a, _b, _c, _d, _e, _f, _g, _h, _j;
 }());
 
 //# sourceMappingURL=soups.js.map
@@ -2907,7 +2941,8 @@ var MapPage = (function () {
                               //console.log("Data: "+JSON.stringify(this.data));
                     */ if (_this.data.length == 0)
                         _this.data = null;
-                    _this.storage.set('meal', JSON.stringify(_this.data));
+                    else
+                        _this.storage.set('meal', JSON.stringify(_this.data));
                 });
             }
             else {
@@ -2923,6 +2958,11 @@ var MapPage = (function () {
         if (item.prod_name == "Pancakes" || item.prod_name == "Combo of any 4") {
             var modal = this.modalCtrl.create(__WEBPACK_IMPORTED_MODULE_6__toppings_toppings__["a" /* ToppingsPage */], { meal: item }, this.myModalOptions);
             modal.present();
+            modal.onWillDismiss(function (data) {
+                if (data) {
+                    _this.navCtrl.setRoot(MapPage_1);
+                }
+            });
         }
         else {
             item.quantity++;
@@ -2950,12 +2990,13 @@ var MapPage = (function () {
         else if (item.prod_name == "Combo of any 4") {
             this.userData.removeMealData(item.prod_name);
         }
-        if (item.quantity > 0 && item.quantity != 1) {
-            item.quantity--;
-            item.total = (item.quantity * item.mrp);
-            //if(item.prod_name == "Pancakes" || item.prod_name == "Combo of any 4") {
-            this.userData.getMeals().then(function (data) {
-                _this.itemList = data;
+        console.log("Item Quantity: " + item.quantity);
+        this.userData.getMeals().then(function (data) {
+            _this.itemList = data;
+            if (item.prod_name !== "Pancakes" && item.quantity > 0 && item.quantity != 1) {
+                item.quantity--;
+                item.total = (item.quantity * item.mrp);
+                //if(item.prod_name == "Pancakes" || item.prod_name == "Combo of any 4") {
                 var index;
                 _this.itemList.some(function (entry, i) {
                     if (entry.prod_name == item.prod_name) {
@@ -2963,16 +3004,33 @@ var MapPage = (function () {
                         return true;
                     }
                 });
+                console.log("---------- In If");
                 _this.itemList[index].quantity = item.quantity;
                 _this.storage.set('meal', JSON.stringify(_this.itemList));
-            });
-        }
-        else if (item.quantity == 1) {
-            item.quantity--;
-            item.total = 0;
-            this.userData.removeMeal(item);
-            this.navCtrl.setRoot(MapPage_1);
-        }
+                //this.navCtrl.setRoot(MapPage);
+            }
+            else if (item.quantity == 1) {
+                item.quantity--;
+                item.total = 0;
+                console.log("-------------------  In Else");
+                _this.userData.removeMeal(item);
+                _this.navCtrl.setRoot(MapPage_1);
+            }
+            else if (item.prod_name == 'Pancakes') {
+                console.log("Item: " + JSON.stringify(item));
+                console.log("Item List: " + JSON.stringify(_this.itemList));
+                item.quantity--;
+                item.total = (item.quantity * item.mrp);
+                _this.itemList.some(function (entry, i) {
+                    if (entry.toppings == item.toppings) {
+                        index = i;
+                        return true;
+                    }
+                });
+                _this.itemList[index].quantity = item.quantity;
+                _this.storage.set('meal', JSON.stringify(_this.itemList));
+            }
+        });
         //console.log("Decrement: "+item.total);
         //    MapPage.total -= item.total;
     };

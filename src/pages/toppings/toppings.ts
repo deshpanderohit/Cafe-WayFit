@@ -4,11 +4,6 @@ import { Storage } from '@ionic/storage';
 
 import { UserData } from '../../providers/user-data';
 
-//import { MapPage } from '../map/map';
-
-
-//import { MapPage } from '../map/map';
-
 /**
  * Generated class for the ToppingsPage page.
  *
@@ -51,8 +46,8 @@ export class ToppingsPage {
     console.log('ionViewDidLoad ToppingsPage');
   }
 
-  dismiss() {
-    this.viewCtrl.dismiss();
+  dismiss(data?: any) {
+    this.viewCtrl.dismiss(data);
     //this.navCtrl.setRoot(MapPage);
   }
 
@@ -100,7 +95,7 @@ export class ToppingsPage {
               console.log("In Top If");
               this.itemList.push(this.item);
               this.storage.set('meal',JSON.stringify(this.itemList));
-              this.viewCtrl.dismiss();
+              this.viewCtrl.dismiss(top);
             }
             else {
               if(!(this.itemList.some(a => a.prod_name.includes(this.item.prod_name)))) {
@@ -117,7 +112,7 @@ export class ToppingsPage {
 
                 this.itemList[index].toppings = top;
                 this.storage.set('meal',JSON.stringify(this.itemList));
-                this.viewCtrl.dismiss();
+                this.viewCtrl.dismiss(top);
               }
               else {
                   console.log("Top Array: "+JSON.stringify(this.topArr));
@@ -144,7 +139,7 @@ export class ToppingsPage {
                     this.itemList[index].toppings = top;
                     console.log("Hello If");
                     this.storage.set('meal',JSON.stringify(this.itemList));                
-                    this.viewCtrl.dismiss();
+                    this.viewCtrl.dismiss(top);
                     
                   }
                   else {
@@ -154,13 +149,13 @@ export class ToppingsPage {
                     this.newItem.toppings = top;
                     this.itemList = this.itemList.concat(this.newItem);
                     this.storage.set('meal',JSON.stringify(this.itemList));
-                    this.viewCtrl.dismiss();
+                    this.viewCtrl.dismiss(top);
                   }
                 }
               }
             }
-          }); 
-        }  
+          });
+        }
       }
       else if(combo!="") {
 
@@ -214,7 +209,7 @@ export class ToppingsPage {
         }
         //this.events.publish('cart:updated',++this.count);
       } 
-        this.viewCtrl.dismiss();
+        this.viewCtrl.dismiss(combo);
       }
     }
 

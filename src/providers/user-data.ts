@@ -19,6 +19,7 @@ export class UserData {
   meal: any = [];
   temp: any = [];
   count = 0;
+  mealData: any = [];
 
   constructor(
     public events: Events,
@@ -196,9 +197,36 @@ export class UserData {
 
     });
   
+/*    this.getMeals().then(data => {
+      this.mealData = data;
+
+      if(item.quantity>0 && item.quantity!=1) {
+        item.quantity--;
+        item.total = (item.quantity * item.mrp);
+
+        var index;
+        this.mealData.some(function(entry, i) {
+          if( entry.prod_name == "Pancakes" && entry.toppings == item.toppings) {
+            index = i;
+            return true;
+          }
+        });
+
+        this.mealData[index].quantity = item.quantity;
+        this.storage.set('meal',JSON.stringify(this.mealData));
+      }
+      else if(item.quantity == 1) {
+        item.quantity--;
+        item.total=0;
+        this.storage.remove('meal');
+        
+      }  
+    })
+*/
   }
 
   removeMealData(item: any) {
+    
     console.log("Meal Data: "+item);
 
     this.getMealData().then(data => {

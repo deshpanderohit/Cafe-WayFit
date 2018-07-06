@@ -117,7 +117,8 @@ export class MapPage implements OnInit {
           //console.log("Data: "+JSON.stringify(this.data));
 */        if(this.data.length == 0) 
             this.data = null;
-          this.storage.set('meal',JSON.stringify(this.data));
+          else
+            this.storage.set('meal',JSON.stringify(this.data));
         });
       }
       else {
@@ -137,6 +138,12 @@ export class MapPage implements OnInit {
       let modal = this.modalCtrl.create(ToppingsPage, {meal: item}, this.myModalOptions);
       modal.present();
       
+      modal.onWillDismiss((data: any[]) => {
+        if (data) {
+          this.navCtrl.setRoot(MapPage);
+        }
+      });
+
     }
     else {
       item.quantity++;
@@ -169,36 +176,58 @@ export class MapPage implements OnInit {
       this.userData.removeMealData(item.prod_name);
     }
 
-    if(item.quantity>0 && item.quantity!=1) {
+    console.log("Item Quantity: "+item.quantity);
+    this.userData.getMeals().then(data => {
+      this.itemList = data;
+
+    if(item.prod_name !== "Pancakes" && item.quantity>0 && item.quantity!=1) {
+
       item.quantity--;
       item.total = (item.quantity * item.mrp);
-
       //if(item.prod_name == "Pancakes" || item.prod_name == "Combo of any 4") {
-        this.userData.getMeals().then(data => {
-          this.itemList = data;
 
           var index;
           this.itemList.some(function(entry, i) {
-            if( entry.prod_name == item.prod_name) {
+            if( entry.prod_name == item.prod_name ) {
               index = i;
               return true;
             }
           });
 
+          console.log("---------- In If");
           this.itemList[index].quantity = item.quantity;
           this.storage.set('meal',JSON.stringify(this.itemList));
-        });
+          
       
+        //this.navCtrl.setRoot(MapPage);
     }
     else if(item.quantity == 1) {
       item.quantity--;
       item.total=0;
-      
+      console.log("-------------------  In Else");
       this.userData.removeMeal(item);
 
       this.navCtrl.setRoot(MapPage);
     }
+    else if(item.prod_name == 'Pancakes') {
+
+      console.log("Item: "+JSON.stringify(item));
+      console.log("Item List: "+JSON.stringify(this.itemList));
+      item.quantity--;
+      item.total = (item.quantity * item.mrp);
+
+      this.itemList.some(function(entry, i) {
+        if( entry.toppings == item.toppings ) {
+          index = i;
+          return true;
+        }
+      });
+
+      this.itemList[index].quantity = item.quantity;
+      this.storage.set('meal',JSON.stringify(this.itemList));
+    }
     
+  });
     //console.log("Decrement: "+item.total);
 //    MapPage.total -= item.total;
   }
