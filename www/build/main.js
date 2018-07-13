@@ -9,7 +9,7 @@ webpackJsonp([0],{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_user_data__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_http__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_http__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_map__ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__signup_signup__ = __webpack_require__(110);
@@ -97,7 +97,7 @@ var LoginPage = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SignupPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ionic_angular__ = __webpack_require__(5);
@@ -385,10 +385,9 @@ var ToppingsPage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-toppings',template:/*ion-inline-start:"/root/project/WayFit/src/pages/toppings/toppings.html"*/'<!--\n  Generated template for the ToppingsPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-toolbar>\n\n    <div *ngIf="item.prod_name == \'Pancakes\'">\n      <ion-title>Choose Topping</ion-title>\n    </div>\n\n    <div *ngIf="item.prod_name == \'Combo of any 4\'">\n      <ion-title>Choose your meal</ion-title>\n    </div>\n    \n      <ion-buttons start>\n        <button ion-button (click)="dismiss()">Cancel</button>\n      </ion-buttons>\n</ion-toolbar>  \n\n</ion-header>\n\n\n<ion-content padding style="padding-top: 15px">\n  <div *ngIf="item">\n  <ion-list>\n    <div *ngIf="item.prod_name == \'Pancakes\'">\n      <ion-item>\n          <ion-label style="font-size: 14px">Pancake Toppings</ion-label>\n            \n              <ion-select [(ngModel)]="topping">\n                  <ion-option [value]="maple">Maple Syrup</ion-option>\n                  <ion-option [value]="blueberry">Blueberry Syrup</ion-option>\n                  <ion-option [value]="fruit">Mix-Fruit Syrup</ion-option>\n                  <ion-option [value]="butter">Butter</ion-option>\n              </ion-select>\n      </ion-item>\n  </div>\n\n  <div *ngIf="item.prod_name == \'Combo of any 4\'">\n    <ion-item>\n        <ion-label style="font-size: 14px">Chooes your meal</ion-label>\n            <ion-select [(ngModel)]="meal" multiple>\n                <ion-option [value]="paneer">Grilled Paneer</ion-option>\n                <ion-option [value]="chicken">Grilled Chicken</ion-option>\n                <ion-option [value]="brice">Brown Rice</ion-option>\n                <ion-option [value]="wrice">White Rice</ion-option>\n                <ion-option [value]="vegies">Vegies</ion-option>\n                <ion-option [value]="spotato">Sweet Potato</ion-option>\n                <ion-option [value]="beans">Kidney Beans/ Mixed Beans</ion-option>                    \n            </ion-select>\n    </ion-item>\n  </div>\n</ion-list> \n\n  <div padding>\n    <button ion-button full (click)="getToppings(topping,meal)">Ok</button>\n  </div>\n</div>\n\n</ion-content>\n'/*ion-inline-end:"/root/project/WayFit/src/pages/toppings/toppings.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["u" /* ViewController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["u" /* ViewController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__providers_user_data__["a" /* UserData */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_user_data__["a" /* UserData */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["t" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["t" /* ToastController */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Events */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Events */]) === "function" && _g || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["u" /* ViewController */], __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_3__providers_user_data__["a" /* UserData */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["t" /* ToastController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Events */]])
     ], ToppingsPage);
     return ToppingsPage;
-    var _a, _b, _c, _d, _e, _f, _g;
 }());
 
 //# sourceMappingURL=toppings.js.map
@@ -402,7 +401,7 @@ var ToppingsPage = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SchedulePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_conference_data__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_user_data__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_mealsdata_mealsdata__ = __webpack_require__(59);
@@ -668,7 +667,7 @@ webpackEmptyAsyncContext.id = 126;
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UserData; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_storage__ = __webpack_require__(18);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -1171,6 +1170,7 @@ var AddressPage = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_user_data__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__order_order__ = __webpack_require__(216);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_storage__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_http__ = __webpack_require__(25);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1185,6 +1185,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 /**
  * Generated class for the TimePage page.
  *
@@ -1192,7 +1193,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * Ionic pages and navigation.
  */
 var TimePage = (function () {
-    function TimePage(navCtrl, navParams, viewCtrl, userData, storage, toastCtrl) {
+    function TimePage(navCtrl, navParams, viewCtrl, userData, storage, toastCtrl, http) {
         var _this = this;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
@@ -1200,8 +1201,10 @@ var TimePage = (function () {
         this.userData = userData;
         this.storage = storage;
         this.toastCtrl = toastCtrl;
+        this.http = http;
         this.meal = [];
         this.quantities = [];
+        this.finalMeal = [];
         this.initialize();
         this.getMealsData();
         JSON.stringify(this.timeslots);
@@ -1277,6 +1280,15 @@ var TimePage = (function () {
                 }
             });
             _this.storage.remove('meal');
+            if (_this.meal && total && timeslot) {
+                console.log("Meal Data: " + JSON.stringify(_this.meal));
+                var meal = JSON.stringify({ meal: _this.meal, time: timeslot, total: total });
+                _this.http.post('http://localhost/api/product/data.php', meal).map(function (res) { return res.json(); }).subscribe(function (res) {
+                    console.log("Data received: " + JSON.stringify(res));
+                }, function () {
+                    console.log("Data not received");
+                });
+            }
             _this.toast = _this.toastCtrl.create({
                 message: 'Your order has been placed!',
                 showCloseButton: true,
@@ -1297,7 +1309,7 @@ var TimePage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-time',template:/*ion-inline-start:"/root/project/WayFit/src/pages/time/time.html"*/'<!--\n  Generated template for the TimePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-toolbar>\n\n      <ion-title>Time Slot</ion-title>\n\n      <ion-buttons start>\n        <button ion-button (click)="dismiss()">Cancel</button>\n      </ion-buttons>\n</ion-toolbar>  \n\n</ion-header>\n\n\n<ion-content padding style="background-color: #dde3ec;">\n\n  <div padding>\n    <ion-list style="padding-top: 5px">\n      <ion-item>\n      <ion-label style="font-size: 14px">Delivery Time</ion-label>\n      <ion-select [(ngModel)]="time">\n        <ion-option *ngFor="let timeslot of timeslots" [value]="timeslot">{{ timeslot.st }} - {{ timeslot.et }}</ion-option>\n      </ion-select>\n    </ion-item>\n\n  <div padding style="padding-top: 50px">\n    <h5>Total Amount:\n        <img alt="logo" height="13" src="assets/img/rupee-indian.png" >{{ total }}/-\n    </h5>\n  </div>\n\n  <div padding>\n    <button ion-button full color="facebook" (click)="order(total,time)">Place Order</button>\n  </div>\n</ion-list>\n</div>\n\n</ion-content>\n'/*ion-inline-end:"/root/project/WayFit/src/pages/time/time.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["u" /* ViewController */], __WEBPACK_IMPORTED_MODULE_2__providers_user_data__["a" /* UserData */], __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["t" /* ToastController */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["u" /* ViewController */], __WEBPACK_IMPORTED_MODULE_2__providers_user_data__["a" /* UserData */], __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["t" /* ToastController */], __WEBPACK_IMPORTED_MODULE_5__angular_http__["a" /* Http */]])
     ], TimePage);
     return TimePage;
 }());
@@ -2037,8 +2049,8 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common_http__ = __webpack_require__(248);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ionic_angular__ = __webpack_require__(5);
@@ -2589,7 +2601,7 @@ var ItemsPage = (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ConferenceData; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__user_data__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Observable__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_Observable__);
@@ -3117,16 +3129,27 @@ var MapPage = (function () {
     MapPage.total = 0;
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])('mapCanvas'),
-        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */]) === "function" && _a || Object)
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */])
     ], MapPage.prototype, "mapElement", void 0);
     MapPage = MapPage_1 = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-map',template:/*ion-inline-start:"/root/project/WayFit/src/pages/map/map.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Cart\n    &nbsp;<ion-icon end name="cart"></ion-icon>\n  </ion-title>\n<!--    <button ion-button end>\n      <ion-icon name="ios-cart-outline" style="position: relative; font-weight: bold; font-size: 2em" color="white">\n        <ion-badge style="position:absolute; font-weight: bold; top:-5px; left:9px; font-size: 9px" color="danger">2</ion-badge>\n      </ion-icon>\n    </button>\n-->\n  </ion-navbar>\n</ion-header>\n\n<ion-content style="background-color: #dde3ec;">\n\n  <div *ngIf="data!=null || top!=null; else empty">\n  <ion-row padding style="font-size: 15px;">\n    <ion-col col-7><b>Recipes</b></ion-col>\n    <ion-col col-3><b>Quantity</b></ion-col>\n    <ion-col col-2><b>Price</b></ion-col>\n  </ion-row>\n    <ion-list style="padding: 7px;">\n      <ion-item-sliding *ngFor="let item of data">\n        \n        <ion-item>\n          <ion-row>\n              \n            <ion-col col-7>\n              <p id="truncate" style="font-size:13px; color:black;" *ngIf=" item.V == \'Y\' && item.prod_name !== \'Pancakes\'">\n                <img alt="logo" height="15" src="assets/img/veg.png">{{ item?.prod_name }}\n              </p>\n              <p id="truncate" style="font-size:13px; color:black;" *ngIf=" item.V == \'N\' ">\n                <img alt="logo" height="15" src="assets/img/non-veg.png">{{ item?.prod_name }}\n              </p>\n              \n              <p id="truncate" style="font-size: 13px; color:black;" *ngIf=" item.prod_name == \'Pancakes\'">\n                <img alt="logo" height="15" src="assets/img/veg.png">{{ item?.prod_name }}<br>\n                <sub style="font-size: 11px; padding-left: 20px;">{{ item?.toppings }}</sub><br><p></p>\n<!--                <button ion-button clear (click)="customise(item)" style="font-size: 11px; padding-left: 20px;">Customise</button>  -->\n              </p>\n            </ion-col>\n          \n            <ion-col col-3 style="padding-top: 8px;">\n              <ion-icon name="remove-circle" style="font-size:16px;" (click)="decrement($event,item)"></ion-icon>\n                {{ item.quantity }}\n              <ion-icon name="add-circle" style="font-size:16px;" (click)="increment($event,item)"></ion-icon>\n            </ion-col>\n\n            <ion-col col-2 style="padding-top: 8px;">\n              <p ng-model="total" style="font-size:13px; color:black;"> \n                <img alt="logo" height="11" src="assets/img/rupee-indian.png" >{{ item.mrp * item.quantity }}\n              </p>\n            </ion-col>\n          \n          </ion-row>\n      </ion-item>\n    \n<!--      <div padding>\n        <h3>Grand Total : {{  }}</h3>\n      </div>\n    -->      \n    </ion-item-sliding>\n    </ion-list>\n\n    <div padding>\n      <button ion-button full color="facebook" (click)="order(data)">Confirm Order</button> \n    </div>\n  </div>\n\n  <ng-template #empty>\n    <h2 style="text-align: center">Your Cart is Empty!</h2>\n<!--    <div padding style="text-align: center;">\n    <button ion-button clear (click)="home()">Continue Shopping</button>\n  </div>\n-->  \n  </ng-template>\n\n</ion-content>'/*ion-inline-end:"/root/project/WayFit/src/pages/map/map.html"*/
         }),
-        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__providers_conference_data__["a" /* ConferenceData */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_conference_data__["a" /* ConferenceData */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["q" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["q" /* Platform */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["p" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["p" /* NavParams */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["u" /* ViewController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["u" /* ViewController */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_8__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__ionic_storage__["b" /* Storage */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_1__angular_common__["e" /* Location */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_common__["e" /* Location */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* LoadingController */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["t" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["t" /* ToastController */]) === "function" && _j || Object, typeof (_k = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["o" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["o" /* NavController */]) === "function" && _k || Object, typeof (_l = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["m" /* ModalController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["m" /* ModalController */]) === "function" && _l || Object, typeof (_m = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* ActionSheetController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* ActionSheetController */]) === "function" && _m || Object, typeof (_o = typeof __WEBPACK_IMPORTED_MODULE_4__providers_user_data__["a" /* UserData */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__providers_user_data__["a" /* UserData */]) === "function" && _o || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__providers_conference_data__["a" /* ConferenceData */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["q" /* Platform */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["p" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["u" /* ViewController */],
+            __WEBPACK_IMPORTED_MODULE_8__ionic_storage__["b" /* Storage */],
+            __WEBPACK_IMPORTED_MODULE_1__angular_common__["e" /* Location */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* LoadingController */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["t" /* ToastController */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["o" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["m" /* ModalController */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* ActionSheetController */],
+            __WEBPACK_IMPORTED_MODULE_4__providers_user_data__["a" /* UserData */]])
     ], MapPage);
     return MapPage;
-    var MapPage_1, _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o;
+    var MapPage_1;
 }());
 
 //# sourceMappingURL=map.js.map
@@ -3138,7 +3161,7 @@ var MapPage = (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MealsdataProvider; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_http__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_http__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(45);

@@ -4,6 +4,7 @@ import { IonicPage, NavController, NavParams, ViewController, ToastController } 
 import { UserData } from '../../providers/user-data';
 import { OrderPage } from '../order/order';
 import { Storage } from '@ionic/storage';
+import { Http } from '@angular/http';
 
 /**
  * Generated class for the TimePage page.
@@ -30,6 +31,7 @@ export class TimePage {
   total: any;
   final_top: any;
   final_combo: any;
+  finalMeal: Array<{id: number, name: string, timeslot: string, total: number, top: string}> = [];
 
   initialize() {
 
@@ -55,7 +57,7 @@ export class TimePage {
 
 }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public userData: UserData, public storage: Storage, public toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public userData: UserData, public storage: Storage, public toastCtrl: ToastController, public http: Http) {
     this.initialize();
     this.getMealsData();
     JSON.stringify(this.timeslots);
@@ -106,6 +108,7 @@ export class TimePage {
           delete value.prod_desc;
           delete value.prod_img;
           delete value.mrp;
+        
 
           if( value.prod_name == "Pancake") {
             this.userData.getToppings().then(data => {
@@ -121,9 +124,21 @@ export class TimePage {
               this.storage.remove('combo');
             })
           }
-         
-        });
+        }); 
+        
+
         this.storage.remove('meal');
+
+        if(this.meal && total && timeslot) {
+          console.log("Meal Data: "+JSON.stringify(this.meal));
+          let meal = JSON.stringify({meal: this.meal, time: timeslot, total: total});
+          this.http.post('http://localhost/api/product/data.php',meal).map(res => res.json()).subscribe(res => {
+            console.log("Data received: "+JSON.stringify(res));
+          }, () => {
+            console.log("Data not received");
+          });
+        }
+        
         this.toast = this.toastCtrl.create({
           message: 'Your order has been placed!',
           showCloseButton: true,
