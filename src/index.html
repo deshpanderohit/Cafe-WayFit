@@ -18,13 +18,13 @@
 <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.en"></script>
 
   <script>
-    /*
-     * if ('serviceWorker' in navigator) {
-     *   navigator.serviceWorker.register('service-worker.js')
-     *     .then(() => console.log('service worker installed'))
-     *     .catch(err => console.log('Error', err));
-     * }
-     */
+    
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('service-worker.js')
+          .then(() => console.log('service worker installed'))
+          .catch(err => console.log('Error', err));
+      }
+     
   </script>
 
   <link href="build/main.css" rel="stylesheet">

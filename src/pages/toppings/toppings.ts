@@ -72,7 +72,7 @@ export class ToppingsPage {
       });
 
       if(this.item.quantity == 0)
-        this.item.quantity++;
+        this.item.quant
 
       this.getTops().then(data => {
         if(data) {

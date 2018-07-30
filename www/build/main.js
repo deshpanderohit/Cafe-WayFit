@@ -154,7 +154,7 @@ var SignupPage = (function () {
     };
     SignupPage.prototype.mregister = function () {
         var data = JSON.stringify({ memid: this.memid, username: this.username, password: this.password, cpassword: this.cpassword });
-        this.http.post('http://localhost/ionic/validateLogin.php', data).map(function (res) { return res.json(); }).subscribe(function (res) { alert("success: Userid " + res.userid + " Access Token " + res.token); }, function () { alert("failed"); });
+        this.http.post('http://localhost/api/product/gym_signup.php', data).map(function (res) { return res.json(); }).subscribe(function (res) { alert("success: Userid " + res.userid + " Access Token " + res.token); }, function () { alert("failed"); });
     };
     SignupPage.prototype.newmregister = function () {
         var data = JSON.stringify({ name: this.name, username: this.username, email: this.email, mobile: this.mob, password: this.password, cpassword: this.cpassword });
@@ -252,7 +252,7 @@ var ToppingsPage = (function () {
                 }
             });
             if (this.item.quantity == 0)
-                this.item.quantity++;
+                this.item.quant;
             this.getTops().then(function (data) {
                 if (data) {
                     _this.topArr = data;

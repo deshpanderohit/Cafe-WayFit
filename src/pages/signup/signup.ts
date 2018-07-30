@@ -8,8 +8,6 @@ import { NavController } from 'ionic-angular';
 
 import { UserData } from '../../providers/user-data';
 
-
-
 @Component({
   selector: 'page-user',
   templateUrl: 'signup.html'
@@ -74,7 +72,7 @@ export class SignupPage implements OnInit {
 	mregister() {
 		let data=JSON.stringify({memid: this.memid, username: this.username, password:this.password, cpassword:this.cpassword});
 
-		this.http.post('http://localhost/ionic/validateLogin.php',data).map(res => res.json()).subscribe(res => {alert("success: Userid "+res.userid+" Access Token "+res.token);}, () => {alert("failed");});		
+		this.http.post('http://localhost/api/product/gym_signup.php',data).map(res => res.json()).subscribe(res => {alert("success: Userid "+res.userid+" Access Token "+res.token);}, () => {alert("failed");});		
 	
 	}
 
