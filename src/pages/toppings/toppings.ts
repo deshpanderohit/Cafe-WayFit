@@ -53,7 +53,8 @@ export class ToppingsPage {
 
   public getToppings(top?: string, combo?: string): void {
     
-    //console.log("Received: "+JSON.stringify(top)+" "+JSON.stringify(combo));
+    
+    console.log("Received: "+JSON.stringify(top));
     //var panTop = JSON.stringify(top);
     
     if(top!="") {
@@ -72,7 +73,7 @@ export class ToppingsPage {
       });
 
       if(this.item.quantity == 0)
-        this.item.quant
+        this.item.quantity++;
 
       this.getTops().then(data => {
         if(data) {
@@ -82,7 +83,8 @@ export class ToppingsPage {
         }
       })
         
-      console.log("Items: "+JSON.stringify(this.item));
+      console.log("Item Quantity: "+JSON.stringify(this.item.quantity));
+      console.log("Items In Tops: "+JSON.stringify(this.item));
       if(this.item.quantity >= 1) {
         this.userData.getMeals().then(data => {
           if(data)
@@ -175,7 +177,7 @@ export class ToppingsPage {
 
         this.item.quantity++;
           
-        console.log("Items: "+JSON.stringify(this.item));
+        console.log("Items In Combo: "+JSON.stringify(this.item));
 
         if(this.item.quantity >= 1) {
           if(combo) {

@@ -96,7 +96,6 @@ export class MapPage implements OnInit {
         this.userData.getMeals().then(mdata => {
           if(mdata)
             this.data = mdata;
-
             console.log("Cart Items: "+JSON.stringify(this.data));
           
 /*          this.data = this.items.map(function(e1) {
@@ -201,7 +200,7 @@ export class MapPage implements OnInit {
       
         //this.navCtrl.setRoot(MapPage);
     }
-    else if(item.quantity == 1) {
+    else if(item.prod_name !== "Pancakes" && item.quantity == 1) {
       item.quantity--;
       item.total=0;
       console.log("-------------------  In Else");
@@ -209,7 +208,7 @@ export class MapPage implements OnInit {
 
       this.navCtrl.setRoot(MapPage);
     }
-    else if(item.prod_name == 'Pancakes') {
+/*    else if(item.prod_name == 'Pancakes') {
 
       console.log("Item: "+JSON.stringify(item));
       console.log("Item List: "+JSON.stringify(this.itemList));
@@ -221,12 +220,13 @@ export class MapPage implements OnInit {
           index = i;
           return true;
         }
+        
       });
 
       this.itemList[index].quantity = item.quantity;
       this.storage.set('meal',JSON.stringify(this.itemList));
     }
-    
+*/    
   });
     //console.log("Decrement: "+item.total);
 //    MapPage.total -= item.total;

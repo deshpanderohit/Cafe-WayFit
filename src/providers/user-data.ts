@@ -5,6 +5,7 @@ import { Storage } from '@ionic/storage';
 
 
 
+
 @Injectable()
 export class UserData {
   _favorites: string[] = [];
@@ -163,16 +164,16 @@ export class UserData {
   }
 
   removeToppings(item: any) {
-    console.log("Item: "+JSON.stringify(item));
-    this.getToppings().then(data => {
-      this.topping = data;
+    console.log("Item In removeToppings: "+JSON.stringify(item));
 
-      if(this.topping.length > 1) {
+     
+/*        
         let length = this.topping.length;
         console.log("Topping Array: "+JSON.stringify(this.topping[length-1]));
         while(length >= 0) {
           if(this.topping[length-1].tops == item.toppings) {
             delete this.topping[length-1];
+            
             this.topping = this.filter_array(this.topping);
             this.storage.set('toppings',JSON.stringify(this.topping));
             break;
@@ -180,22 +181,50 @@ export class UserData {
           else
             length--;
         }
+*/
 /*        
         var pop = this.topping.pop();
         this.storage.set('toppings',JSON.stringify(this.topping));
         console.log("Pop 1: "+JSON.stringify(pop));
 */        
-      }
-      else {
-        if(this.topping.length == 1) {
-          var t = this.topping.pop();
-          console.log("Popped: "+JSON.stringify(t));
-          this.storage.remove('toppings');
-          this.toppingsFlag = 't';
-        }
-      }
+      this.getMeals().then(data => {
+        this.mealData = data;
 
-    });
+        if(item.quantity>1) {
+          item.quantity--;
+          item.total = (item.quantity * item.mrp);
+
+          var index;
+          this.mealData.some(function(entry, i) {
+            if( entry.prod_name == "Pancakes" && entry.toppings == item.toppings) {
+              index = i;
+              return true;
+            }
+          });
+
+          this.mealData[index].quantity = item.quantity;
+          console.log("Meal Data Array: "+JSON.stringify(this.mealData));
+          //this.mealData[index].total = item.total;
+          this.storage.set('meal',JSON.stringify(this.mealData));
+        }
+        else {
+          if(item.quantity == 1) {
+            
+            this.mealData.some(function(entry,i) {
+              if(entry.prod_name == "Pancakes" && entry.topping == item.toppings) {
+                index = i;
+                return true;
+              }
+            });
+
+            delete this.mealData[index];
+            this.storage.set('meal',JSON.stringify(this.mealData));
+            this.storage.remove('toppings');
+            this.toppingsFlag = 't';
+          }
+        }
+      });
+
   
 /*    this.getMeals().then(data => {
       this.mealData = data;
