@@ -46,7 +46,7 @@ var LoginPage = (function () {
     LoginPage.prototype.ngOnInit = function () {
         this.user = new __WEBPACK_IMPORTED_MODULE_3__angular_forms__["b" /* FormGroup */]({
             name: new __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormControl */]('', [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].minLength(4)]),
-            password: new __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormControl */]('', __WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].minLength(4), __WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].maxLength(20), __WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].pattern(this.passwordRegex)]))
+            password: new __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormControl */]('', __WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].minLength(4), __WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].maxLength(20)]))
         });
     };
     LoginPage.prototype.userSignup = function () {
@@ -79,13 +79,14 @@ var LoginPage = (function () {
     };
     LoginPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-user',template:/*ion-inline-start:"/root/project/WayFit/src/pages/login/login.html"*/'<ion-header>\n	<ion-navbar>\n		<button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n		<ion-title>Login</ion-title>\n	</ion-navbar>\n</ion-header>\n\n<ion-content text-center padding class="background-image">\n<!--	<div class="logo">\n		<img src="assets/img/appicon.svg" alt="Ionic logo">\n	</div>\n-->\n\n<form novalidate #loginForm="ngForm" [formGroup]="user" class="background-color">\n\n<ion-item>\n<ion-label floating>Username</ion-label>\n<ion-input type="text" [(ngModel)]="username" value="" formControlName="name"></ion-input>\n</ion-item>\n\n<ion-item no-lines *ngIf="( user.get(\'name\').hasError(\'minlength\') || user.get(\'name\').hasError(\'required\') ) && user.get(\'name\').touched">\n\n<div class="error" *ngIf="user.get(\'name\').hasError(\'required\') && user.get(\'name\').touched">\nPlease enter your username\n</div>\n<div class="error" *ngIf="user.get(\'name\').hasError(\'minlength\') && user.get(\'name\').touched">\nMinimum of 4 characters\n</div>\n</ion-item>\n\n\n\n<ion-item>\n<ion-label floating>Password</ion-label>\n<ion-input type="password" [(ngModel)]="password" value="" formControlName="password"></ion-input>\n</ion-item>\n\n<ion-item no-lines *ngIf="( user.get(\'password\').hasError(\'required\') || user.get(\'password\').hasError(\'minlength\') || user.get(\'password\').hasError(\'maxlength\'))&& user.get(\'password\').touched">\n\n<div class="error" *ngIf="user.get(\'password\').hasError(\'required\') && user.get(\'password\').touched">\nPlease enter your password\n</div>\n<div class="error" *ngIf="user.get(\'password\').hasError(\'minlength\') && user.get(\'password\').touched">\nPassword must contain at least 4 characters\n</div>\n\n<div class="error" *ngIf="user.get(\'password\').hasError(\'maxlength\') && user.get(\'password\').touched">\nMaximum password length is 20\n</div>\n</ion-item>\n\n\n<div padding>\n<button ion-button full color="facebook" [disabled]="user.invalid" (click)="validateLogin()">Login</button>\n</div>\n</form>\n\n<div padding style="padding-top: 40px;">\n	<p class="gray" align="center"><b>New to WayFit?</b></p>\n	<button ion-button full color="facebook" (click)="userSignup()">Register Now!</button>\n</div>\n\n\n\n</ion-content>\n\n\n<style type="text/css">\n.error\n{\ncolor:red;\nfont-size:12px;\n}\n</style>\n'/*ion-inline-end:"/root/project/WayFit/src/pages/login/login.html"*/
+            selector: 'page-user',template:/*ion-inline-start:"/root/project/WayFit/src/pages/login/login.html"*/'<ion-header>\n	<ion-navbar>\n		<button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n		<ion-title>Login</ion-title>\n	</ion-navbar>\n</ion-header>\n\n<ion-content text-center padding class="background-image">\n<!--	<div class="logo">\n		<img src="assets/img/appicon.svg" alt="Ionic logo">\n	</div>\n-->\n\n<form novalidate #loginForm="ngForm" [formGroup]="user" class="background-color">\n\n<ion-item>\n<ion-label floating>Username</ion-label>\n<ion-input type="text" [(ngModel)]="username" value="" formControlName="name"></ion-input>\n</ion-item>\n\n<ion-item no-lines *ngIf="( user.get(\'name\').hasError(\'minlength\') || user.get(\'name\').hasError(\'required\') ) && user.get(\'name\').touched">\n\n<div class="error" *ngIf="user.get(\'name\').hasError(\'required\') && user.get(\'name\').touched">\nPlease enter your username\n</div>\n<div class="error" *ngIf="user.get(\'name\').hasError(\'minlength\') && user.get(\'name\').touched">\nMinimum of 4 characters\n</div>\n</ion-item>\n\n\n\n<ion-item>\n<ion-label floating>Password</ion-label>\n<ion-input type="password" [(ngModel)]="password" value="" formControlName="password"></ion-input>\n</ion-item>\n\n<ion-item no-lines *ngIf="( user.get(\'password\').hasError(\'required\') || user.get(\'password\').hasError(\'minlength\') || user.get(\'password\').hasError(\'maxlength\'))&& user.get(\'password\').touched">\n\n<div class="error" *ngIf="user.get(\'password\').hasError(\'required\') && user.get(\'password\').touched">\nPlease enter your password\n</div>\n<div class="error" *ngIf="user.get(\'password\').hasError(\'minlength\') && user.get(\'password\').touched">\nPassword must contain at least 4 characters\n</div>\n\n<div class="error" *ngIf="user.get(\'password\').hasError(\'maxlength\') && user.get(\'password\').touched">\nMaximum password length is 20\n</div>\n</ion-item>\n\n\n<div padding>\n<button ion-button full color="facebook" (click)="validateLogin()">Login</button>\n</div>\n</form>\n\n<div padding style="padding-top: 40px;">\n	<p class="gray" align="center"><b>New to WayFit?</b></p>\n	<button ion-button full color="facebook" (click)="userSignup()">Register Now!</button>\n</div>\n\n\n\n</ion-content>\n\n\n<style type="text/css">\n.error\n{\ncolor:red;\nfont-size:12px;\n}\n</style>\n<!--\n	[disabled]="user.invalid"\n-->'/*ion-inline-end:"/root/project/WayFit/src/pages/login/login.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavController */], __WEBPACK_IMPORTED_MODULE_4__angular_http__["a" /* Http */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["t" /* ToastController */], __WEBPACK_IMPORTED_MODULE_2__providers_user_data__["a" /* UserData */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* LoadingController */]])
     ], LoginPage);
     return LoginPage;
 }());
 
+//Validators.pattern(this.passwordRegex) 
 //# sourceMappingURL=login.js.map
 
 /***/ }),
@@ -763,6 +764,7 @@ var UserData = (function () {
                 _this.product = _this.product.concat(item);
             //this.storage.set('cartCount',JSON.stringify(this.product.length));
             _this.storage.set('meal', JSON.stringify(_this.product));
+            _this.events.publish('cart:updated', ++_this.count);
         });
     };
     UserData.prototype.getMeals = function () {
@@ -791,14 +793,18 @@ var UserData = (function () {
                     _this.storage.remove('toppings');
                 else if (item.prod_name == "Combo of any 4" && item.quantity == "0")
                     _this.storage.remove('combo');
+                _this.events.publish('cart:updated', --_this.count);
             }
             else
                 _this.storage.set('meal', JSON.stringify(_this.data));
+            _this.events.publish('cart:updated', --_this.count);
         });
     };
     UserData.prototype.getToppings = function () {
+        var _this = this;
         return this.storage.get('toppings').then(function (value) {
             return JSON.parse(value);
+            _this.events.publish('cart:updated', ++_this.count);
         });
     };
     UserData.prototype.getMealData = function () {
@@ -822,26 +828,6 @@ var UserData = (function () {
     UserData.prototype.removeToppings = function (item) {
         var _this = this;
         console.log("Item In removeToppings: " + JSON.stringify(item));
-        /*
-                let length = this.topping.length;
-                console.log("Topping Array: "+JSON.stringify(this.topping[length-1]));
-                while(length >= 0) {
-                  if(this.topping[length-1].tops == item.toppings) {
-                    delete this.topping[length-1];
-                    
-                    this.topping = this.filter_array(this.topping);
-                    this.storage.set('toppings',JSON.stringify(this.topping));
-                    break;
-                  }
-                  else
-                    length--;
-                }
-        */
-        /*
-                var pop = this.topping.pop();
-                this.storage.set('toppings',JSON.stringify(this.topping));
-                console.log("Pop 1: "+JSON.stringify(pop));
-        */
         this.getMeals().then(function (data) {
             _this.mealData = data;
             if (item.quantity > 1) {
@@ -854,24 +840,30 @@ var UserData = (function () {
                         return true;
                     }
                 });
-                _this.mealData[index].quantity = item.quantity;
-                console.log("Meal Data Array: " + JSON.stringify(_this.mealData));
-                //this.mealData[index].total = item.total;
-                _this.storage.set('meal', JSON.stringify(_this.mealData));
+                _this.mealData.forEach(function (value) {
+                    if (value.toppings == item.toppings) {
+                        _this.mealData[index].quantity = item.quantity;
+                        _this.storage.set('meal', JSON.stringify(_this.mealData));
+                    }
+                });
+                /*
+                          this.mealData[index].quantity = item.quantity;
+                          console.log("Meal Data Array: "+JSON.stringify(this.mealData));
+                          //this.mealData[index].total = item.total;
+                          this.storage.set('meal',JSON.stringify(this.mealData));
+                */
             }
-            else {
-                if (item.quantity == 1) {
-                    _this.mealData.some(function (entry, i) {
-                        if (entry.prod_name == "Pancakes" && entry.topping == item.toppings) {
-                            index = i;
-                            return true;
-                        }
-                    });
-                    delete _this.mealData[index];
-                    _this.storage.set('meal', JSON.stringify(_this.mealData));
-                    _this.storage.remove('toppings');
-                    _this.toppingsFlag = 't';
-                }
+            else if (item.quantity == 1) {
+                _this.mealData.some(function (entry, i) {
+                    if (entry.prod_name == "Pancakes" && entry.topping == item.toppings) {
+                        index = i;
+                        return true;
+                    }
+                });
+                delete _this.mealData[index];
+                _this.storage.set('meal', JSON.stringify(_this.mealData));
+                _this.storage.remove('toppings');
+                _this.toppingsFlag = 't';
             }
         });
         /*    this.getMeals().then(data => {
@@ -1559,6 +1551,7 @@ var SoupsPage = (function () {
     SoupsPage.prototype.add = function (ev, item) {
         var _this = this;
         ev.stopPropagation();
+        //this.events.publish('cart:updated', ++this.count);
         this.userData.hasLoggedIn().then(function (data) {
             if (data) {
                 if (item.prod_name == "Pancakes" || item.prod_name == "Combo of any 4") {
@@ -2818,6 +2811,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var TabsPage = (function () {
     function TabsPage(navParams, events, userData, storage) {
+        var _this = this;
         this.events = events;
         this.userData = userData;
         this.storage = storage;
@@ -2827,23 +2821,18 @@ var TabsPage = (function () {
         this.tab3Root = __WEBPACK_IMPORTED_MODULE_2__map_map__["a" /* MapPage */];
         this.tab4Root = __WEBPACK_IMPORTED_MODULE_6__about_about__["a" /* AboutPage */];
         this.mySelectedIndex = navParams.data.tabIndex || 0;
-        /*    this.events.subscribe('cart:updated', (count) => {
-              this.cartCount = count;
-            });
-        */
+        this.events.subscribe('cart:updated', function (count) {
+            _this.cartCount = count;
+        });
     }
     TabsPage.prototype.ionViewDidEnter = function () {
-    };
-    TabsPage.prototype.cartCount = function () {
-        //let count = this.storage.get('cartCount');
-        //return count;
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Content */]),
         __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Content */])
     ], TabsPage.prototype, "content", void 0);
     TabsPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/root/project/WayFit/src/pages/tabs-page/tabs-page.html"*/'<ion-content has-footer="true" has-tabs="true">\n\n  <ion-tabs [selectedIndex]="mySelectedIndex" name="conference" mode="md" tabsPlacement="bottom">\n    <ion-tab class="top-44" [root]="tab1Root" tabIcon="nutrition" tabUrlPath="conference-schedule"></ion-tab>\n    <ion-tab class="top-44" [root]="tab2Root" tabIcon="clipboard"></ion-tab>\n    <ion-tab class="top-44" [root]="tab3Root" tabIcon="cart" [tabBadge]="cartCount()"></ion-tab>\n    <ion-tab class="top-44" [root]="tab4Root" tabIcon="information-circle"></ion-tab>\n  </ion-tabs>\n  \n</ion-content>\n\n\n<!--\n  tabTitle="Meals"\n  tabTitle="Plans"\n  tabTitle="Cart"\n  tabTitle="Offers"\n-->'/*ion-inline-end:"/root/project/WayFit/src/pages/tabs-page/tabs-page.html"*/
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/root/project/WayFit/src/pages/tabs-page/tabs-page.html"*/'<ion-content has-footer="true" has-tabs="true">\n\n  <ion-tabs [selectedIndex]="mySelectedIndex" name="conference" mode="md" tabsPlacement="bottom">\n    <ion-tab class="top-44" [root]="tab1Root" tabIcon="nutrition" tabUrlPath="conference-schedule"></ion-tab>\n    <ion-tab class="top-44" [root]="tab2Root" tabIcon="clipboard"></ion-tab>\n    <ion-tab class="top-44" [root]="tab3Root" tabIcon="cart" [tabBadge]="cartCount"></ion-tab>\n    <ion-tab class="top-44" [root]="tab4Root" tabIcon="information-circle"></ion-tab>\n  </ion-tabs>\n  \n</ion-content>\n\n\n<!--\n  tabTitle="Meals"\n  tabTitle="Plans"\n  tabTitle="Cart"\n  tabTitle="Offers"\n-->'/*ion-inline-end:"/root/project/WayFit/src/pages/tabs-page/tabs-page.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Events */], __WEBPACK_IMPORTED_MODULE_5__providers_user_data__["a" /* UserData */], __WEBPACK_IMPORTED_MODULE_7__ionic_storage__["b" /* Storage */]])
     ], TabsPage);
@@ -3155,16 +3144,27 @@ var MapPage = (function () {
     MapPage.total = 0;
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])('mapCanvas'),
-        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */]) === "function" && _a || Object)
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */])
     ], MapPage.prototype, "mapElement", void 0);
     MapPage = MapPage_1 = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-map',template:/*ion-inline-start:"/root/project/WayFit/src/pages/map/map.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Cart\n    &nbsp;<ion-icon end name="cart"></ion-icon>\n  </ion-title>\n<!--    <button ion-button end>\n      <ion-icon name="ios-cart-outline" style="position: relative; font-weight: bold; font-size: 2em" color="white">\n        <ion-badge style="position:absolute; font-weight: bold; top:-5px; left:9px; font-size: 9px" color="danger">2</ion-badge>\n      </ion-icon>\n    </button>\n-->\n  </ion-navbar>\n</ion-header>\n\n<ion-content style="background-color: #dde3ec;">\n\n  <div *ngIf="data!=null || top!=null; else empty">\n  <ion-row padding style="font-size: 15px;">\n    <ion-col col-7><b>Recipes</b></ion-col>\n    <ion-col col-3><b>Quantity</b></ion-col>\n    <ion-col col-2><b>Price</b></ion-col>\n  </ion-row>\n    <ion-list style="padding: 7px;">\n      <ion-item-sliding *ngFor="let item of data">\n        \n        <ion-item>\n          <ion-row>\n              \n            <ion-col col-7>\n              <p id="truncate" style="font-size:13px; color:black;" *ngIf=" item.V == \'Y\' && item.prod_name !== \'Pancakes\'">\n                <img alt="logo" height="15" src="assets/img/veg.png">{{ item?.prod_name }}\n              </p>\n              <p id="truncate" style="font-size:13px; color:black;" *ngIf=" item.V == \'N\' ">\n                <img alt="logo" height="15" src="assets/img/non-veg.png">{{ item?.prod_name }}\n              </p>\n              \n              <p id="truncate" style="font-size: 13px; color:black;" *ngIf=" item.prod_name == \'Pancakes\'">\n                <img alt="logo" height="15" src="assets/img/veg.png">{{ item?.prod_name }}<br>\n                <sub style="font-size: 11px; padding-left: 20px;">{{ item?.toppings }}</sub><br><p></p>\n<!--                <button ion-button clear (click)="customise(item)" style="font-size: 11px; padding-left: 20px;">Customise</button>  -->\n              </p>\n            </ion-col>\n          \n            <ion-col col-3 style="padding-top: 8px;">\n              <ion-icon name="remove-circle" style="font-size:16px;" (click)="decrement($event,item)"></ion-icon>\n                {{ item.quantity }}\n              <ion-icon name="add-circle" style="font-size:16px;" (click)="increment($event,item)"></ion-icon>\n            </ion-col>\n\n            <ion-col col-2 style="padding-top: 8px;">\n              <p ng-model="total" style="font-size:13px; color:black;"> \n                <img alt="logo" height="11" src="assets/img/rupee-indian.png" >{{ item.mrp * item.quantity }}\n              </p>\n            </ion-col>\n          \n          </ion-row>\n      </ion-item>\n    \n<!--      <div padding>\n        <h3>Grand Total : {{  }}</h3>\n      </div>\n    -->      \n    </ion-item-sliding>\n    </ion-list>\n\n    <div padding>\n      <button ion-button full color="facebook" (click)="order(data)">Confirm Order</button> \n    </div>\n  </div>\n\n  <ng-template #empty>\n    <h2 style="text-align: center">Your Cart is Empty!</h2>\n<!--    <div padding style="text-align: center;">\n    <button ion-button clear (click)="home()">Continue Shopping</button>\n  </div>\n-->  \n  </ng-template>\n\n</ion-content>'/*ion-inline-end:"/root/project/WayFit/src/pages/map/map.html"*/
         }),
-        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__providers_conference_data__["a" /* ConferenceData */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_conference_data__["a" /* ConferenceData */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["q" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["q" /* Platform */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["p" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["p" /* NavParams */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["u" /* ViewController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["u" /* ViewController */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_8__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__ionic_storage__["b" /* Storage */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_1__angular_common__["e" /* Location */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_common__["e" /* Location */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* LoadingController */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["t" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["t" /* ToastController */]) === "function" && _j || Object, typeof (_k = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["o" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["o" /* NavController */]) === "function" && _k || Object, typeof (_l = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["m" /* ModalController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["m" /* ModalController */]) === "function" && _l || Object, typeof (_m = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* ActionSheetController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* ActionSheetController */]) === "function" && _m || Object, typeof (_o = typeof __WEBPACK_IMPORTED_MODULE_4__providers_user_data__["a" /* UserData */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__providers_user_data__["a" /* UserData */]) === "function" && _o || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__providers_conference_data__["a" /* ConferenceData */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["q" /* Platform */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["p" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["u" /* ViewController */],
+            __WEBPACK_IMPORTED_MODULE_8__ionic_storage__["b" /* Storage */],
+            __WEBPACK_IMPORTED_MODULE_1__angular_common__["e" /* Location */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* LoadingController */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["t" /* ToastController */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["o" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["m" /* ModalController */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* ActionSheetController */],
+            __WEBPACK_IMPORTED_MODULE_4__providers_user_data__["a" /* UserData */]])
     ], MapPage);
     return MapPage;
-    var MapPage_1, _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o;
+    var MapPage_1;
 }());
 
 //# sourceMappingURL=map.js.map

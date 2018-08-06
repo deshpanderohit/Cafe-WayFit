@@ -118,6 +118,8 @@ export class SoupsPage {
   add(ev:any,item: any) {
 
     ev.stopPropagation();
+
+    //this.events.publish('cart:updated', ++this.count);
     
     this.userData.hasLoggedIn().then((data) =>{
 

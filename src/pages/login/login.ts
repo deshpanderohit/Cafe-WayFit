@@ -38,7 +38,7 @@ export class LoginPage implements OnInit {
 
 		this.user = new FormGroup({
 			name: new FormControl('', [Validators.required, Validators.minLength(4)]),
-			password: new FormControl('',Validators.compose([Validators.required,Validators.minLength(4), Validators.maxLength(20),Validators.pattern(this.passwordRegex)]))
+			password: new FormControl('',Validators.compose([Validators.required,Validators.minLength(4), Validators.maxLength(20)]))
 		});
 
 	}
@@ -87,3 +87,4 @@ export class LoginPage implements OnInit {
 
  
 }
+//Validators.pattern(this.passwordRegex)

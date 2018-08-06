@@ -24,15 +24,15 @@ export class TabsPage {
   tab4Root: any = AboutPage;
   mySelectedIndex: number;
   badge: any;
-  
+  cartCount: number;
 
   constructor(navParams: NavParams, public events: Events, public userData: UserData, public storage: Storage) {
     this.mySelectedIndex = navParams.data.tabIndex || 0;
 
-/*    this.events.subscribe('cart:updated', (count) => {
-      this.cartCount = count;
+    this.events.subscribe('cart:updated', (count) => {
+        this.cartCount = count;
     });
-*/
+
   }
 
   @ViewChild(Content) content: Content;
@@ -41,11 +41,7 @@ export class TabsPage {
   ionViewDidEnter() {
   }
 
-  cartCount() {
-    //let count = this.storage.get('cartCount');
-    //return count;
-  }
-
+ 
 
 
 }

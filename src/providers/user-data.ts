@@ -4,8 +4,6 @@ import { Events, LoadingController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 
-
-
 @Injectable()
 export class UserData {
   _favorites: string[] = [];
@@ -16,7 +14,7 @@ export class UserData {
   HAS_SEEN_TUTORIAL = 'hasSeenTutorial';
   topping: any = [];
   toppingsFlag = 't';
-  mealFlag = 't'
+  mealFlag = 't';
   meal: any = [];
   temp: any = [];
   count = 0;
@@ -95,6 +93,7 @@ export class UserData {
         
         //this.storage.set('cartCount',JSON.stringify(this.product.length));
         this.storage.set('meal',JSON.stringify(this.product));
+        this.events.publish('cart:updated', ++this.count);
     }); 
   }
 
@@ -128,15 +127,17 @@ export class UserData {
             this.storage.remove('toppings');
           else if(item.prod_name == "Combo of any 4" && item.quantity == "0")
             this.storage.remove('combo');
+        this.events.publish('cart:updated', --this.count);
       }
       else
         this.storage.set('meal',JSON.stringify(this.data));
+        this.events.publish('cart:updated', --this.count);
     });
    }
 
    getToppings(): Promise<any> {
     return this.storage.get('toppings').then(value => {
-      return JSON.parse(value);
+      return JSON.parse(value);this.events.publish('cart:updated', ++this.count);
     });
   }
 
@@ -166,28 +167,7 @@ export class UserData {
   removeToppings(item: any) {
     console.log("Item In removeToppings: "+JSON.stringify(item));
 
-     
-/*        
-        let length = this.topping.length;
-        console.log("Topping Array: "+JSON.stringify(this.topping[length-1]));
-        while(length >= 0) {
-          if(this.topping[length-1].tops == item.toppings) {
-            delete this.topping[length-1];
-            
-            this.topping = this.filter_array(this.topping);
-            this.storage.set('toppings',JSON.stringify(this.topping));
-            break;
-          }
-          else
-            length--;
-        }
-*/
-/*        
-        var pop = this.topping.pop();
-        this.storage.set('toppings',JSON.stringify(this.topping));
-        console.log("Pop 1: "+JSON.stringify(pop));
-*/        
-      this.getMeals().then(data => {
+    this.getMeals().then(data => {
         this.mealData = data;
 
         if(item.quantity>1) {
@@ -202,13 +182,20 @@ export class UserData {
             }
           });
 
+          this.mealData.forEach(value => {
+            if(value.toppings == item.toppings) {
+              this.mealData[index].quantity = item.quantity;
+              this.storage.set('meal',JSON.stringify(this.mealData));          
+            }
+          })
+/*
           this.mealData[index].quantity = item.quantity;
           console.log("Meal Data Array: "+JSON.stringify(this.mealData));
           //this.mealData[index].total = item.total;
           this.storage.set('meal',JSON.stringify(this.mealData));
+*/          
         }
-        else {
-          if(item.quantity == 1) {
+        else if(item.quantity == 1) {
             
             this.mealData.some(function(entry,i) {
               if(entry.prod_name == "Pancakes" && entry.topping == item.toppings) {
@@ -222,7 +209,7 @@ export class UserData {
             this.storage.remove('toppings');
             this.toppingsFlag = 't';
           }
-        }
+        
       });
 
   
